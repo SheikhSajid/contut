@@ -1,0 +1,23 @@
+<h1>Listing all Tutors</h1>
+
+<p>
+  <%= link_to "Register as a tutor", new_tutor_path %>
+</p>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+  </tr>
+
+  <% @tutors.each do |tutor| %>
+  <tr>
+    <td><%= tutor.fname %></td>
+    <td><%= tutor.lname %></td>
+    <td><%= tutor.email %></td>
+    <td><%= link_to 'Show', tutor_path(tutor) %></td>
+  </tr>
+  <% end %>
+</table>
+
