@@ -1,3 +1,40 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+#logo {
+  float: left;
+  font-size: 1.5em;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer li {
+  float: right;
+  list-style: none;
+}
+
+footer small {
+  float: left;
+}
+
+.full-name {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.p_description {
+  border-top: 1px solid #eaeaea;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

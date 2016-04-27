@@ -1,23 +1,26 @@
-<h1>Listing all Tutors</h1>
+<h1 align="center">Listing all Tutors</h1>
 
 <p>
   <%= link_to "Register as a tutor", new_tutor_path %>
 </p>
 
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-  </tr>
+<% @tutors.each do |tutor| %>
+  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="full-name">
+        <%= link_to "#{tutor.fname} #{tutor.lname}", tutor_path(tutor) %>
+        </div>
+        <%= tutor.email %>
+        <div class="p_description">
+          <%= truncate(tutor.description, length: 100) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-  <% @tutors.each do |tutor| %>
-  <tr>
-    <td><%= tutor.fname %></td>
-    <td><%= tutor.lname %></td>
-    <td><%= tutor.email %></td>
-    <td><%= link_to 'Show', tutor_path(tutor) %></td>
-  </tr>
-  <% end %>
-</table>
+
+
 
