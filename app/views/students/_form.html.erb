@@ -1,0 +1,79 @@
+<%= render "layouts/errors", obj: @student %>
+
+<div class='row'>
+  <div class='col-xs-12'>
+    <%= form_for(@student, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :first_name, :placeholder => "First name" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :last_name, :placeholder => "Last name" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.email_field :email, :placeholder => "Email" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :phone, :placeholder => "Phone Number" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.password_field :password, :placeholder => "Password" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.select :gender, ['Male', 'Female']%></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :city, :placeholder => "City" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :area, :placeholder => "Area" %>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_field :zip, :placeholder => "Zip Code" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-8">
+        <%= f.text_area :full_address, :placeholder => "Full Address" %></br>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit class: 'btn btn-primary btn-lg' %></br>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

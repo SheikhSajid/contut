@@ -1,10 +1,12 @@
 class TutorsController < ApplicationController
+  before_action :set_tutor, only: [:edit, :update, :show, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  
   def index
     @tutors = Tutor.all
   end
 
   def show
-    @tutor = Tutor.find(params[:id])
   end
 
   def new
@@ -12,13 +14,15 @@ class TutorsController < ApplicationController
   end
 
   def edit
-    @tutor = Tutor.find(params[:id])
   end
 
   def create
     @tutor = Tutor.new(tutor_params)
 
-    if @tutor.save
+    if Student.find_by(email: @tutor.email)
+      flash.now[:danger] = "email already in use"
+      render :new
+    elsif @tutor.save
       flash[:notice] = "You have successfully registered as a tutor"
       redirect_to tutor_path(@tutor)
     else
@@ -27,8 +31,6 @@ class TutorsController < ApplicationController
   end
 
   def update
-    @tutor = Tutor.find(params[:id])
-    
     if @tutor.update(tutor_params)
       flash[:notice] = "Profile updated"
       redirect_to tutor_path(@tutor)
@@ -38,7 +40,6 @@ class TutorsController < ApplicationController
   end
 
   def destroy
-    @tutor = Tutor.find(params[:id])
     @tutor.destroy
     flash[:notice] = "Profile deleted"
     redirect_to root_path
@@ -48,5 +49,16 @@ class TutorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutor_params
       params.require(:tutor).permit(:fname, :lname, :email, :password, :password_confirmation, :gender, :curr_employer, :position, :rate, :description, :city, :area, :zip, :full_address, :rating)
+    end
+    
+    def set_tutor
+      @tutor = Tutor.find(params[:id])
+    end
+    
+    def require_same_user
+      if @tutor != current_user
+        flash[:danger] = "Unauthorized access"
+        redirect_to root_path
+      end
     end
 end

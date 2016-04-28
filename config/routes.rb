@@ -1,24 +1,11 @@
 Rails.application.routes.draw do
-  get 'students/index'
-
-  get 'students/show'
-
-  get 'students/new'
-
-  get 'students/edit'
-
-  get 'students/create'
-
-  get 'students/update'
-
-  get 'students/destroy'
-
-  # get 'pages/home'
-
-  get 'pages/about'
-
+  get 'about' => 'pages#about'
+  get 'signup' => 'pages#signup'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
   resources :tutors
-
+  resources :students, except: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
