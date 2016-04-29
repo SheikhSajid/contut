@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @reviews = @student.reviews.order(created_at: :desc)
   end
 
   def new
@@ -13,9 +14,6 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    if @student != current_user
-      flash
-    end
   end
 
   def create
@@ -25,6 +23,7 @@ class StudentsController < ApplicationController
       flash.now[:danger] = "email already in use"
       render :new
     elsif @student.save
+      session[:student_id] = @student.id
       flash[:notice] = "You have successfully registered as a student"
       redirect_to student_path(@student)
     else

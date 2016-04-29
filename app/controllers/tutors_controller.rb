@@ -7,6 +7,14 @@ class TutorsController < ApplicationController
   end
 
   def show
+    # @reviews = Review.where(tutor_id: @tutor.id).order(created_at: :desc)
+    @reviews = @tutor.reviews.order(created_at: :desc)
+    
+    if @reviews.blank?
+      @avg_review = 0
+    else
+      @avg_review = @reviews.average(:rating).round(1)
+    end
   end
 
   def new
@@ -23,6 +31,7 @@ class TutorsController < ApplicationController
       flash.now[:danger] = "email already in use"
       render :new
     elsif @tutor.save
+      session[:tutor_id] = @tutor.id
       flash[:notice] = "You have successfully registered as a tutor"
       redirect_to tutor_path(@tutor)
     else

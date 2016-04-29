@@ -1,3 +1,10 @@
 <h2 align="center"><%= "#{@student.first_name} #{@student.last_name}" %></h2>
 
 <p>email: <%= @student.email %></p>
+
+<p>Reviews given: <%= reviews_written %></p>
+
+<% @reviews.each do |review| %>
+  <div class="star-rating" data-score=<%= review.rating %>></div>
+  <p><%= review.comment %></p>
+<% end %>

@@ -2,3 +2,26 @@
 <h2 align="center"><%= "#{@tutor.fname} #{@tutor.lname}" %></h2>
 
 <p>email: <%= @tutor.email %></p>
+
+<p><div class="star-rating" data-score=<%= @avg_review %>></div></p></br></br>
+<em><%= "#{number_of_reviews}" %></em>
+<% @reviews.each do |review| %>
+  <div class="star-rating" data-score=<%= review.rating %>></div>
+  <p><%= review.comment %></p>
+<% end %>
+
+<% if logged_in? %>
+  <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
+<% else %>
+  <p><%= link_to "Write a review", login_path, class: "btn btn-primary" %></p>
+<% end %>
+
+<script>
+  $(".star-rating").raty({
+    path: "/assets",
+    readOnly: true,
+    score: function() {
+      return $(this).attr("data-score");
+    }
+  });
+</script>

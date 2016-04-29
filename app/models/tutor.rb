@@ -8,4 +8,6 @@ class Tutor < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX }
     has_secure_password
     validates :password, length: { minimum: 6 }
+    
+    has_many :reviews
 end
