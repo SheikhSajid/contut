@@ -9,6 +9,7 @@ class TutorsController < ApplicationController
   def show
     # @reviews = Review.where(tutor_id: @tutor.id).order(created_at: :desc)
     @reviews = @tutor.reviews.order(created_at: :desc)
+    @subjects = @tutor.subjects
     
     if @reviews.blank?
       @avg_review = 0

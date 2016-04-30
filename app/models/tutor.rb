@@ -10,4 +10,6 @@ class Tutor < ActiveRecord::Base
     validates :password, length: { minimum: 6 }
     
     has_many :reviews
+    has_many :subjects
+    # has_many :students, through: :reviews
 end
