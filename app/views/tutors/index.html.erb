@@ -1,8 +1,10 @@
 <h1 align="center">Listing all Tutors</h1>
 
-<p>
-  <%= link_to "Register as a tutor", new_tutor_path %>
-</p>
+<% if !logged_in? %>
+  <p align="center">
+    <%= link_to "Register as a tutor", new_tutor_path, class: "btn btn-primary" %>
+  </p>
+<% end %>
 
 <% @tutors.each do |tutor| %>
   
