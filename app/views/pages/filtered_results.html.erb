@@ -1,12 +1,6 @@
 <div class="page-header">
-    <h2>Listing all Tutors</h2>
+    <h2>Results</h2>
 </div>
-
-<% if !logged_in? %>
-  <p align="center">
-    <%= link_to "Register as a tutor", new_tutor_path, class: "btn btn-primary" %>
-  </p>
-<% end %>
 
 <% @tutors.each do |tutor| %>
   
@@ -25,7 +19,3 @@
     </div>
   </div>
 <% end %>
-
-
-
-

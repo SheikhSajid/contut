@@ -1,0 +1,7 @@
+<div class="page-header">
+    <h2>Available subjects</h2>
+</div>
+
+<% @subjects.each do |subject| %>
+  <p><%= link_to subject.name, filtered_results_path({name: subject.name}), class: 'btn btn-primary btn-lg' %></p>
+<% end %>

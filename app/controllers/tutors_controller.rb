@@ -58,7 +58,7 @@ class TutorsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutor_params
-      params.require(:tutor).permit(:fname, :lname, :email, :password, :password_confirmation, :gender, :curr_employer, :position, :rate, :description, :city, :area, :zip, :full_address, :rating)
+      params.require(:tutor).permit(:fname, :lname, :email, :password, :password_confirmation, :gender, :curr_employer, :position, :rate, :description, :city, :area, :zip, :full_address, :rating, :profile_picture, :phone)
     end
     
     def set_tutor

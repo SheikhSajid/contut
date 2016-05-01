@@ -2,6 +2,8 @@
 
 <!------------Profile photo and info-------------->
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+  <%= image_tag @tutor.profile_picture.url(:thumb) %>
+  
   <h2><%= "#{@tutor.fname} #{@tutor.lname}" %></h2>
   <% if logged_in? %>
     <p>email: <%= @tutor.email %></p>
@@ -9,18 +11,25 @@
   <% else %>
     <p>Sign in to see contact informantion.</p>
   <% end %>
+  
+  <div class="page-header"><h4>About Myself</h4></div>
+  <%= @tutor.description %>
 </div>
 
 <!--------ratings from the students-------------->
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-  <p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div></p></br></br>
-  <em><%= "#{number_of_reviews}" %></em>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 reviews">
+  <p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div>
+  <em><%= "#{number_of_reviews}" %></em></p></br></br>
+  
   <% @reviews.each do |review| %>
+    <% student = Student.find(review.student_id) %>
+    <%= link_to student.first_name + " " + student.last_name, student_path(student) %>
     <div class="star-rating" data-score=<%= review.rating %>></div>
     <p><%= review.comment %></p>
   <% end %>
   
-  <% if logged_in? and session[:student_id] %>
+ 
+  <% if session[:student_id] %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>
@@ -30,6 +39,10 @@
   <h3>Subjects taught:</h3>
   <% @subjects.each do |subject| %>
     <p><%= subject.name.capitalize %>, Grade: <%= subject.grade %></p>
+  <% end %>
+  
+  <% if session[:tutor_id] == params[:id].to_i %>
+    <p><%= link_to "Add New Subject", new_subject_path({tutor_id: params[:id]}) %></p>
   <% end %>
 </div>
 

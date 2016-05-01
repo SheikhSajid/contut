@@ -11,4 +11,17 @@ class PagesController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def filter
+    @subjects = Subject.select("DISTINCT name")
+  end
+  
+  def filtered_results
+    @subject = Subject.where(name: params[:name])
+    @tutors = []
+    
+    @subject.each do |s|
+      @tutors << Tutor.find(s.tutor_id)      
+    end
+  end
 end
