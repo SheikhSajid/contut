@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502154221) do
+ActiveRecord::Schema.define(version: 20160502175404) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160502154221) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "city"
     t.string   "area"
     t.integer  "zip"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160502154221) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "password_digest"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "profile_picture_file_name"
     t.string   "profile_picture_content_type"
     t.integer  "profile_picture_file_size"
