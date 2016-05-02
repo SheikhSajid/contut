@@ -14,14 +14,14 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(subject_params)
     # @subject.tutor_id = @tutor.id
-    
+    @subject.name.capitalize!
     if @subject.save
       flash[:success] = "Profile updated!"
     else
       flash[:danger] = "Error"
     end
     
-    redirect_to edit_tutor_path(@subject.tutor_id)
+    redirect_to tutor_path(@subject.tutor_id)
   end
 
   def edit

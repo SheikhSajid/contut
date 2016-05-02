@@ -1,3 +1,5 @@
+<% provide(:title, "#{@tutor.fname} #{@tutor.lname}") %>
+<% @already_reviewed = false %>
 <div class="row">
 
 <!------------Profile photo and info-------------->
@@ -19,31 +21,48 @@
 <!--------ratings from the students-------------->
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 reviews">
   <p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div>
-  <em><%= "#{number_of_reviews}" %></em></p></br></br>
+  <em><%= "#{number_of_reviews}" %></em></p></br>
   
   <% @reviews.each do |review| %>
-    <% student = Student.find(review.student_id) %>
+    <p><% student = Student.find(review.student_id) %>
     <%= link_to student.first_name + " " + student.last_name, student_path(student) %>
+    <%=  time_ago_in_words(review.created_at) %> ago
     <div class="star-rating" data-score=<%= review.rating %>></div>
-    <p><%= review.comment %></p>
+    <%= review.comment %>
+    <% @already_reviewed = true if review.student_id == session[:student_id] %>
+    
+    <% if session[:student_id] and review.student_id == session[:student_id]%>
+      <div class="edit-delete-review">
+        <small><%= link_to "Edit", '#' %></small>
+        <small><%= link_to "Delete", '#', :method => :delete %></small>
+      </div></p></br>
+    <% end %>
   <% end %>
-  
- 
-  <% if session[:student_id] %>
+  </br></br>
+  <% if !(@already_reviewed) %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>
 
-<!----------subjects-------------->
+<!----------subjects and education-------------->
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-  <h3>Subjects taught:</h3>
-  <% @subjects.each do |subject| %>
-    <p><%= subject.name.capitalize %>, Grade: <%= subject.grade %></p>
-  <% end %>
+  <div id="show-subjects">
+    <h3>Subjects taught:</h3>
+    <% @subjects.each do |subject| %>
+      <p><%= subject.name.capitalize %>, Grade: <%= subject.grade %></p>
+    <% end %>
+    
+    <% if session[:tutor_id] == params[:id].to_i %>
+      <p><%= link_to "Add New Subject", new_subject_path({tutor_id: params[:id]}) %></p>
+    <% end %>
+  </div>
   
-  <% if session[:tutor_id] == params[:id].to_i %>
-    <p><%= link_to "Add New Subject", new_subject_path({tutor_id: params[:id]}) %></p>
-  <% end %>
+  <div id="show-education">
+    <h3>Education:</h3>
+      <p><%= @tutor.degree %></p>
+      <p><%= @tutor.institution %></p>
+      <p><%= @tutor.year %></p>
+  </div>
 </div>
 
 </div>

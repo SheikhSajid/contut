@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430132253) do
+ActiveRecord::Schema.define(version: 20160502154221) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
@@ -31,10 +31,14 @@ ActiveRecord::Schema.define(version: 20160430132253) do
     t.string   "area"
     t.integer  "zip"
     t.text     "full_address"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "password_digest"
     t.string   "gender"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -65,13 +69,9 @@ ActiveRecord::Schema.define(version: 20160430132253) do
     t.string   "profile_picture_content_type"
     t.integer  "profile_picture_file_size"
     t.datetime "profile_picture_updated_at"
-  end
-
-  create_table "tutors_subjects", force: :cascade do |t|
-    t.integer  "tutor_id"
-    t.integer  "subject_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "degree"
+    t.string   "institution"
+    t.integer  "year"
   end
 
 end

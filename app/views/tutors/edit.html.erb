@@ -1,2 +1,5 @@
-<h1>Edit Profile</h1>
+<% provide(:title, "Edit Profile") %>
+<h1 align="center">Edit Profile</h1>
 <%= render "form" %>
+</br>
+<%= link_to "Delete Profile", go_to_profile, :method => :delete, class: "btn btn-danger delete-profile" %>

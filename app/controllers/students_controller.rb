@@ -18,13 +18,14 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    
+    @student.first_name.capitalize!
+    @student.last_name.capitalize!
     if Tutor.find_by(email: @student.email)
       flash.now[:danger] = "email already in use"
       render :new
     elsif @student.save
       session[:student_id] = @student.id
-      flash[:notice] = "You have successfully registered as a student"
+      flash[:success] = "You have successfully registered as a student"
       redirect_to student_path(@student)
     else
       render :new
@@ -50,7 +51,9 @@ class StudentsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :email, :phone, :password, :password_confirmation, :gender, :city, :area, :zip, :full_address)
+      params.require(:student).permit(:first_name, :last_name, :email, :phone, :password,
+                                      :password_confirmation, :gender, :city, :area, :zip,
+                                      :full_address, :profile_picture)
     end
     
     def set_student

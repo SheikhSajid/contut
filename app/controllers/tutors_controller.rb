@@ -27,13 +27,14 @@ class TutorsController < ApplicationController
 
   def create
     @tutor = Tutor.new(tutor_params)
-
+    @tutor.fname.capitalize!
+    @tutor.lname.capitalize!
     if Student.find_by(email: @tutor.email)
       flash.now[:danger] = "email already in use"
       render :new
     elsif @tutor.save
       session[:tutor_id] = @tutor.id
-      flash[:notice] = "You have successfully registered as a tutor"
+      flash[:success] = "You have successfully registered as a tutor"
       redirect_to tutor_path(@tutor)
     else
       render :new
@@ -58,7 +59,10 @@ class TutorsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutor_params
-      params.require(:tutor).permit(:fname, :lname, :email, :password, :password_confirmation, :gender, :curr_employer, :position, :rate, :description, :city, :area, :zip, :full_address, :rating, :profile_picture, :phone)
+      params.require(:tutor).permit(:fname, :lname, :email, :password, :password_confirmation,
+                                    :gender, :rate, :description,
+                                    :city, :area, :zip, :full_address, :rating, :profile_picture,
+                                    :phone, :degree, :institution, :year)
     end
     
     def set_tutor

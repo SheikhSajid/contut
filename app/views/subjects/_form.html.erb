@@ -1,28 +1,17 @@
 <%= render "layouts/errors", obj: @subject %>
 
 <div class='row'>
-  <div class='col-xs-12'>
+  <div class="col-md-6 col-md-offset-3">
     <%= form_for(@subject, :html => {class: "form-horizontal", role: "form"}) do |f| %>
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.label :grade %>
-        <%= f.select :grade, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'other'] %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_area :name, :placeholder => "Name of the subject." %>
-        </div>
-      </div>
-      
+      <%= f.label :grade %>
+      <%= f.select :grade, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'other'] %>
+
+      <%= f.text_area :name, :placeholder => "Name of the subject." %>
+
       <%= f.hidden_field :tutor_id, :value => params[:tutor_id] %>
-      
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-        <%= f.submit class: 'btn btn-primary btn-lg' %>
-        </div>
-      </div>
+
+      <%= f.submit class: 'btn btn-primary btn-lg' %>
+
     <% end %>
   </div>
 </div>

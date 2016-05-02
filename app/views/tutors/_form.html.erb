@@ -1,94 +1,35 @@
 <%= render "layouts/errors", obj: @tutor %>
 
 <div class='row'>
-  <div class='col-xs-12'>
+  <div class="col-md-6 col-md-offset-3">
     <%= form_for(@tutor, :html => {class: "form-horizontal", role: "form", multipart: true}) do |f| %>
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_field :fname, :placeholder => "First name" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_field :lname, :placeholder => "Last name" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.number_field :rate, :placeholder => "Rate" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.number_field :phone, :placeholder => "Phone Number" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.email_field :email, :placeholder => "Email" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.password_field :password, :placeholder => "Password" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.select :gender, ['Male', 'Female']%>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_area :description, :placeholder => "Description" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_field :city, :placeholder => "City" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_field :area, :placeholder => "Area" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_field :zip, :placeholder => "Zip Code" %>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-8">
-        <%= f.text_area :full_address, :placeholder => "Full Address" %>
-        </div>
-      </div>
+      <%= f.text_field :fname, :placeholder => "First name" %>
+      <%= f.text_field :lname, :placeholder => "Last name" %>
+    
+      <%= f.number_field :rate, :placeholder => "Rate" %>
+    
+      <%= f.number_field :phone, :placeholder => "Phone Number" %>
+      <%= f.email_field :email, :placeholder => "Email" %>
+    
+      <%= f.password_field :password, :placeholder => "Password" %>
+      <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
+
+      <%= f.select :gender, ['Male', 'Female']%>
+      <%= f.text_area :description, :placeholder => "Description" %>
+
+      <%= f.text_field :city, :placeholder => "City" %>
+      <%= f.text_field :area, :placeholder => "Area" %>
+      <%= f.text_field :zip, :placeholder => "Zip Code" %>
+      <%= f.text_area :full_address, :placeholder => "Full Address" %>
+
+      <%= f.text_field :degree, :placeholder => "Highest degree earned" %>
+      <%= f.text_field :institution, :placeholder => "Institution" %>
+      <%= f.number_field :year, :placeholder => "Year" %>
       
       <%= f.label :profile_picture %>
       <%= f.file_field :profile_picture %>
-      
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-        <%= f.submit class: 'btn btn-primary btn-lg' %>
-        </div>
-      </div>
+
+      <%= f.submit class: 'btn btn-primary btn-lg' %>
     <% end %>
   </div>
 </div>
