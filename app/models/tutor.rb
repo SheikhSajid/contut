@@ -10,7 +10,7 @@ class Tutor < ActiveRecord::Base
     validates :password, length: { minimum: 6 }
     
     has_many :reviews
-    has_many :subjects
+    has_many :subjects, dependent: :destroy
     # has_many :students, through: :reviews
     
     has_attached_file :profile_picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"

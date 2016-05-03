@@ -17,4 +17,5 @@
 /tmp
 
 # Ignore images
-/app/assets/images
+public/system/tutors/profile_pictures
+public/system/students/profile_pictures

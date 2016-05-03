@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:edit, :update, :show]
+  before_action :set_student, only: [:edit, :update, :show, :destroy]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def index
@@ -42,7 +42,6 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    @student = Student.find(params[:id])
     @student.destroy
     flash[:notice] = "Profile deleted"
     redirect_to root_path

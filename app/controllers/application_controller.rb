@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :current_user, :logged_in?, :edit_profile, :go_to_profile
+  helper_method :current_user, :logged_in?, :edit_profile, :go_to_profile, :require_tutor, :require_student
   
   def current_user
     if session[:tutor_id]
@@ -17,10 +17,26 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   
-  def require_user
-    if !logged_in?
-      flash[:danger] = "You must be logged in to perform that action"
-      redirect_to login_path
+  # def logged_in_as_tutor
+  #   if session[:tutor_id]
+  #     return true
+  #   else
+  #     flash[:danger] = "You must be logged as a student perform that action"
+  #     return false
+  #   end
+  # end
+  
+  def require_tutor
+    if session[:tutor_id].nil?
+      flash[:danger] = "You must be logged as a tutor perform that action"
+      redirect_to root_path
+    end
+  end
+  
+  def require_student
+    if session[:student_id].nil?
+      flash[:danger] = "You must be logged as a student perform that action"
+      redirect_to root_path
     end
   end
   

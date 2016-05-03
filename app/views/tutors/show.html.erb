@@ -23,23 +23,26 @@
   <p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div>
   <em><%= "#{number_of_reviews}" %></em></p></br>
   
+  <!-----Print all the reviews----->
   <% @reviews.each do |review| %>
     <p><% student = Student.find(review.student_id) %>
     <%= link_to student.first_name + " " + student.last_name, student_path(student) %>
-    <%=  time_ago_in_words(review.created_at) %> ago
+    </br><small><%=  time_ago_in_words(review.created_at) %> ago</small>
     <div class="star-rating" data-score=<%= review.rating %>></div>
     <%= review.comment %>
     <% @already_reviewed = true if review.student_id == session[:student_id] %>
     
-    <% if session[:student_id] and review.student_id == session[:student_id]%>
+    <% if session[:student_id] and @already_reviewed %>
       <div class="edit-delete-review">
-        <small><%= link_to "Edit", '#' %></small>
-        <small><%= link_to "Delete", '#', :method => :delete %></small>
+        <small><%= link_to "Edit", edit_tutor_review_path(@tutor, review) %></small>
+        <small><%= link_to "Delete", tutor_review_path(@tutor, review), :method => :delete %> </small>
       </div></p></br>
     <% end %>
   <% end %>
   </br></br>
-  <% if !(@already_reviewed) %>
+  
+  <!------------Add review button------------>
+  <% if !(@already_reviewed) and session[:student_id] %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>

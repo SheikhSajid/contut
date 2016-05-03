@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:edit, :update, :show]
+  before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_tutor
-  before_action :require_user
+  before_action :require_student, only: [:new, :create]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   
   
@@ -22,8 +22,12 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     @review.update(review_params)
+    redirect_to @tutor
   end
 
   def destroy
@@ -46,8 +50,8 @@ class ReviewsController < ApplicationController
     end
     
     def require_same_user
-      if @review.user_id != current_user.id
-        flash[:danger] = "Unauthorized access"
+      if @review.student_id != session[:student_id]
+        flash[:danger] = "Oops! You are not allowed to do that."
         redirect_to root_path
       end
     end
