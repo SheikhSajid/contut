@@ -34,6 +34,7 @@
         
         <!-------------  LOGGED IN  -------------->
         <% if logged_in? %>
+          <li><%= link_to "Messages", messages_path %></li>
           <li><%= link_to "My Profile", go_to_profile %></li>          
           
           <!-------------  SETTINGS DROPDOWN  -------------->
@@ -41,7 +42,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
             
             <ul class="dropdown-menu">
-              <li><%= link_to "Messages", messages_path %></li>
               <li><%= link_to "Edit Profile", edit_profile %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Sign Out", logout_path, method: :delete %></li>

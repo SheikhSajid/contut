@@ -1,5 +1,8 @@
 class Tutor < ActiveRecord::Base
     before_save { self.email = email.downcase }
+    before_save { self.fname = fname.capitalize }
+    before_save { self.lname = lname.capitalize }
+    
     validates :fname,  presence: true, length: { maximum: 50 }
     validates :lname,  presence: true, length: { maximum: 50 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

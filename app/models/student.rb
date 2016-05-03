@@ -1,5 +1,8 @@
 class Student < ActiveRecord::Base
     before_save { self.email = email.downcase }
+    before_save { self.first_name = first_name.capitalize }
+    before_save { self.last_name = last_name.capitalize }
+    
     validates :first_name,  presence: true, length: { maximum: 50 }
     validates :last_name,   presence: true, length: { maximum: 50 }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -4,28 +4,32 @@
   <% provide(:title, "#{@sender.first_name} #{@sender.last_name}") %>
 <% end %>  
 
-<div id="message list">
+<div align='center' id="message list">
   <% @messages.each do |msg| %>
-    <% if session[:tutor_id] %>
-      <% if msg.sender_tutor %>
-        <p>You: <%= msg.message %></p>
-      <% else %>
-        <p><%= "#{@sender.first_name}:  #{msg.message}" %></p>
+    <p>
+      <% if session[:tutor_id] %>
+        <% if msg.sender_tutor %>
+          You: <%= msg.message %>
+        <% else %>
+          <p><%= "#{@sender.first_name}:  #{msg.message}" %>
+        <% end %>
+      <% elsif session[:student_id] %>
+        <% if msg.sender_student %>
+          <p>You: <%= msg.message %>
+        <% else %>
+          <p><%= "#{@sender.fname}:  #{msg.message}" %>
+        <% end %>
       <% end %>
-    <% elsif session[:student_id] %>
-      <% if msg.sender_student %>
-        <p>You: <%= msg.message %></p>
-      <% else %>
-        <p><%= "#{@sender.fname}:  #{msg.message}" %></p>
-      <% end %>
+      </br>
+      <small><%=  time_ago_in_words(msg.created_at) %> ago</small>
     <% end %>
-  <% end %>
-</div>
+  </p>
 
-<% if session[:student_id] %>
-  <%= link_to "New Message", new_message_path({tutor_id: params[:tutor_id]}), class: "btn btn-primary" %>
-<% elsif session[:tutor_id] %>
-  <%= link_to "New Message", new_message_path({student_id: params[:student_id]}), class: "btn btn-primary" %>
-<% end %>
-  
+
+  <% if session[:student_id] %>
+    <%= link_to "New Message", new_message_path({tutor_id: params[:tutor_id]}), class: "btn btn-primary" %>
+  <% elsif session[:tutor_id] %>
+    <%= link_to "New Message", new_message_path({student_id: params[:student_id]}), class: "btn btn-primary" %>
+  <% end %>
+</div>  
   
