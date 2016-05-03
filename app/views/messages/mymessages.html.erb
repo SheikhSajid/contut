@@ -1,0 +1,15 @@
+<% provide(:title, "Messages") %>
+
+<div id="message list">
+  <% @senders.each do |sender| %>
+    <p>
+    <% if session[:tutor_id] %>
+      <% student = Student.find(sender.student_id) %>
+      <%= link_to "#{student.first_name} #{student.last_name}", feed_path({student_id: student.id}) %>
+    <% elsif session[:student_id] %>
+      <% tutor = Tutor.find(sender.tutor_id) %>
+      <%= link_to "#{tutor.first_name} #{tutor.last_name}", feed_path({tutor_id: tutor.id}) %>
+    <% end %>
+    </p>
+  <% end %>
+</div>

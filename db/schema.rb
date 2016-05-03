@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502175404) do
+ActiveRecord::Schema.define(version: 20160503132711) do
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.text     "message"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "sender_tutor"
+    t.boolean  "sender_student"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
@@ -72,6 +82,8 @@ ActiveRecord::Schema.define(version: 20160502175404) do
     t.string   "degree"
     t.string   "institution"
     t.integer  "year"
+    t.string   "curr_employer"
+    t.string   "position"
   end
 
 end

@@ -29,6 +29,7 @@ class TutorsController < ApplicationController
     @tutor = Tutor.new(tutor_params)
     @tutor.fname.capitalize!
     @tutor.lname.capitalize!
+    
     if Student.find_by(email: @tutor.email)
       flash.now[:danger] = "email already in use"
       render :new
