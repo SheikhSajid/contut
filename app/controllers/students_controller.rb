@@ -18,8 +18,6 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    # @student.first_name.capitalize!
-    # @student.last_name.capitalize!
     if Tutor.find_by(email: @student.email)
       flash.now[:danger] = "email already in use"
       render :new
@@ -28,13 +26,14 @@ class StudentsController < ApplicationController
       flash[:success] = "You have successfully registered as a student"
       redirect_to student_path(@student)
     else
+      flash.now[:danger] = "Something happened."
       render :new
     end
   end
 
   def update
     if @student.update(student_params)
-      flash[:notice] = "Profile updated"
+      flash[:success] = "Profile updated"
       redirect_to student_path(@student)
     else
       render :edit
@@ -43,7 +42,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
-    flash[:notice] = "Profile deleted"
+    flash[:danger] = "Profile deleted"
     redirect_to root_path
   end
   

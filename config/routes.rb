@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   resources :students, except: [:index]
   resources :subjects
   resources :messages, except: [:show]
+  resources :articles
 
 end
