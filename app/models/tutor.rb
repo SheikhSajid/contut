@@ -1,16 +1,21 @@
 class Tutor < ActiveRecord::Base
-    before_save { self.email = email.downcase }
-    before_save { self.fname = fname.capitalize }
-    before_save { self.lname = lname.capitalize }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
     
-    validates :fname,  presence: true, length: { maximum: 50 }
-    validates :lname,  presence: true, length: { maximum: 50 }
-    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email, presence: true, length: { maximum: 255 },
-                    uniqueness: { case_sensitive: false },
-                    format: { with: VALID_EMAIL_REGEX }
-    has_secure_password
-    validates :password, length: { minimum: 6 }
+    # before_save { self.email = email.downcase }
+    # before_save { self.fname = fname.capitalize }
+    # before_save { self.lname = lname.capitalize }
+    
+    # validates :fname,  presence: true, length: { maximum: 50 }
+    # validates :lname,  presence: true, length: { maximum: 50 }
+    # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    # validates :email, presence: true, length: { maximum: 255 },
+    #                 uniqueness: { case_sensitive: false },
+    #                 format: { with: VALID_EMAIL_REGEX }
+    # has_secure_password
+    # validates :password, length: { minimum: 6 }
     
     has_many :reviews
     has_many :subjects, dependent: :destroy

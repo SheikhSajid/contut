@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :tutors
   root    'pages#home'
   get     'about'     => 'pages#about'
   get     'contact'   => 'pages#contact'
@@ -6,16 +7,16 @@ Rails.application.routes.draw do
   get     'feed'      => 'messages#feed'
 
   # Authentication
-  get     'login'     => 'sessions#new'
-  post    'login'     => 'sessions#create'
-  delete  'logout'    => 'sessions#destroy'
+  # get     'login'     => 'sessions#new'
+  # post    'login'     => 'sessions#create'
+  # delete  'logout'    => 'sessions#destroy'
   
   # Filters
   get     'filter_by_subject' => 'pages#filter'
   get     'filtered_results'  => 'pages#filtered_results'
   
   # Entities
-  resources :tutors do
+  resources :tutors, only: [:index, :show] do
     resources :reviews, except: [:show, :index]
   end
   resources :students, except: [:index]
