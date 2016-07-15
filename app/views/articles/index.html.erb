@@ -20,7 +20,7 @@
         </div>
         <% writer = Tutor.find(article.tutor_id) %>
         <small>By: <%= link_to "#{writer.fname} #{writer.lname}", tutor_path(writer.id) %></small>
-        <small><%= " #{time_ago_in_words(article.created_at)} ago" %></small>
+        
         <div class="p_description">
           <%= truncate(article.body, length: 250) %>
         </div>

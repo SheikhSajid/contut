@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   def mymessages
     if session[:tutor_id]
       @senders = Message.where(tutor_id: session[:tutor_id])
-      @senders = Message.select("DISTINCT student_id")
+      @senders = @senders.select("DISTINCT student_id")
     elsif session[:student_id]
       @senders = Message.where(student_id: session[:student_id])
       @senders = @senders.select("DISTINCT tutor_id")
