@@ -1,20 +1,15 @@
 class SessionsController < ApplicationController
   def new
-    if logged_in?
+    if logged_in? or tutor_signed_in?
       flash[:success] = "You are already logged in"
       redirect_to root_path
     end
   end
   
   def create
-    tutor = Tutor.find_by(email: params[:session][:email].downcase)
     student = Student.find_by(email: params[:session][:email].downcase)
-      
-    if tutor and tutor.authenticate(params[:session][:password])
-      session[:tutor_id] = tutor.id
-      flash[:success] = "You are now logged in as a tutor"
-      redirect_to root_path
-    elsif student and student.authenticate(params[:session][:password])
+   
+    if student and student.authenticate(params[:session][:password])
       session[:student_id] = student.id
       flash[:success] = "You are now logged in as a student"
       redirect_to root_path
@@ -25,7 +20,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:tutor_id] = nil;
     session[:student_id] = nil;
     redirect_to root_path
   end

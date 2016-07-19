@@ -6,7 +6,7 @@
         <%= f.text_area :message, :placeholder => "Type Your Message" %>
         <% if session[:tutor_id] %>
           <%= f.hidden_field :sender_tutor, :value => true %>
-          <%= f.hidden_field :tutor_id, :value => session[:tutor_id] %>
+          <%= f.hidden_field :tutor_id, :value => current_tutor.id %>
           <%= f.hidden_field :student_id, :value => params[:student_id] %>
         <% elsif session[:student_id] %>
           <%= f.hidden_field :sender_student, :value => true %>

@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
   end
 
   def new
-      @subject = Subject.new
+    @subject = Subject.new
   end
 
   def create
@@ -40,7 +40,7 @@ class SubjectsController < ApplicationController
     end
     
     def set_subject
-      @subject = subject.find(params[:id])
+      @subject = Subject.find(params[:id])
     end
     
     def set_tutor
@@ -53,7 +53,7 @@ class SubjectsController < ApplicationController
     end
     
     def require_same_user
-      if params[:tutor_id].to_i != current_user.id
+      if params[:tutor_id].to_i != current_tutor.id
         flash[:danger] = "Unauthorized access"
         redirect_to root_path
       end

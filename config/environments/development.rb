@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -39,7 +39,20 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
+  # Mail delivery
   
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://cs169-1x-sheikhsajid.c9users.io' }
   config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   # :address => "https://cs169-1x-sheikhsajid.c9users.io",
+  #   :port => 587,
+  
+  #   :enable_starttls_auto => true,
+  #   :address => "smtp.gmail.com",
+  #   :domain => "gmail.com",
+  #   :authentication => :plain,
+  #   :user_name => "contut.inc@gmail.com",
+  #   :password => "Xw8E4g26jMmm7tGN"
+  # }
+  config.action_mailer.perform_deliveries = false
 end

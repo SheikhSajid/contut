@@ -46,6 +46,10 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  gem 'mailcatcher', '~> 0.6.1'
+end
+
 group :production do
   gem 'pg' # for Heroku deployment
   gem 'rails_12factor'

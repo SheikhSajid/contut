@@ -11,7 +11,7 @@
     <%= link_to "Message", new_message_path({tutor_id: params[:id]}), class: "btn btn-primary" %>
   <% end %>
   
-  <% if logged_in? %>
+  <% if tutor_signed_in? %>
     <p>email: <%= @tutor.email %></p>
     <p>Phone: <%= @tutor.phone %></p>
   <% else %>
@@ -59,7 +59,7 @@
       <p><%= subject.name.capitalize %>, Grade: <%= subject.grade %></p>
     <% end %>
     
-    <% if session[:tutor_id] == params[:id].to_i %>
+    <% if current_tutor.id == params[:id].to_i %>
       <p><%= link_to "Add New Subject", new_subject_path({tutor_id: params[:id]}) %></p>
     <% end %>
   </div>

@@ -8,7 +8,7 @@
 
       <%= f.text_area :name, :placeholder => "Name of the subject." %>
 
-      <%= f.hidden_field :tutor_id, :value => params[:tutor_id] %>
+      <%= f.hidden_field :tutor_id, :value => current_tutor.id %>
 
       <%= f.submit class: 'btn btn-primary btn-lg' %>
 

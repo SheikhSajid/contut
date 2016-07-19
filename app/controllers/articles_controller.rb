@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:edit, :update, :show, :destroy]
-  before_action :require_tutor, only: [:new, :create]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :set_article, except: [:new, :create, :index]
+  before_action :tutor_signed_in?, only: [:new, :create]
+  before_action :require_same_tutor, only: [:edit, :update, :destroy]
   
   def index
     @articles = Article.all
@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.tutor_id = session[:tutor_id]
+    @article.tutor_id = current_tutor.id
     
     if @article.save
       flash[:success] = "Article successfully created."
@@ -55,8 +55,8 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
     
-    def require_same_user
-      if session[:tutor_id] != @article.tutor_id
+    def require_same_tutor
+      if tutor_signed_in? and current_tutor.id != @article.tutor_id
         flash[:danger] = "Unauthorized access"
         redirect_to articles_path
       end
