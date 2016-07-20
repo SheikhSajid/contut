@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     
     if @message.save
-      if session[:student_id]
+      if student_signed_in?
         redirect_to feed_path({tutor_id: @message.tutor_id})
       elsif tutor_signed_in?
         redirect_to feed_path({student_id: @message.student_id})
@@ -22,10 +22,10 @@ class MessagesController < ApplicationController
   
   def mymessages
     if tutor_signed_in?
-      @senders = Message.where(tutor_id: session[:tutor_id])
+      @senders = Message.where(tutor_id: current_tutor.id)
       @senders = @senders.select("DISTINCT student_id")
-    elsif session[:student_id]
-      @senders = Message.where(student_id: session[:student_id])
+    elsif student_signed_in?
+      @senders = Message.where(student_id: current_student.id)
       @senders = @senders.select("DISTINCT tutor_id")
     end
   end
@@ -33,10 +33,10 @@ class MessagesController < ApplicationController
   def feed
     if tutor_signed_in?
       @messages = Message.where("student_id = ? AND tutor_id = ?", params[:student_id],
-                                                                   session[:tutor_id])
+                                                                   current_tutor.id)
       @sender = Student.find(params[:student_id])
-    elsif session[:student_id]
-      @messages = Message.where("student_id = ? AND tutor_id = ?", session[:student_id],
+    elsif student_signed_in?
+      @messages = Message.where("student_id = ? AND tutor_id = ?", current_student.id,
                                                                    params[:tutor_id])
       @sender = Tutor.find(params[:tutor_id])
     end
@@ -50,6 +50,6 @@ class MessagesController < ApplicationController
     end
     
     def signed_in?
-      tutor_signed_in? or session[:student_id]
+      tutor_signed_in? or student_signed_in?
     end
 end

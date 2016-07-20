@@ -3,10 +3,10 @@
 <div id="message list">
   <% @senders.each do |sender| %>
     <p>
-    <% if session[:tutor_id] %>
+    <% if tutor_signed_in? %>
       <% student = Student.find(sender.student_id) %>
       <%= link_to "#{student.first_name} #{student.last_name}", feed_path({student_id: student.id}) %>
-    <% elsif session[:student_id] %>
+    <% elsif student_signed_in? %>
       <% tutor = Tutor.find(sender.tutor_id) %>
       <%= link_to "#{tutor.fname} #{tutor.lname}", feed_path({tutor_id: tutor.id}) %>
     <% end %>

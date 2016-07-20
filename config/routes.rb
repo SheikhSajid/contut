@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :tutors
+  devise_for :students, controllers: { registrations: 'students/registrations' }
+  devise_for :tutors, controllers: { registrations: 'tutors/registrations' }
+  
   root    'pages#home'
   get     'about'     => 'pages#about'
   get     'contact'   => 'pages#contact'
@@ -19,9 +21,9 @@ Rails.application.routes.draw do
   resources :tutors, only: [:index, :show] do
     resources :reviews, except: [:show, :index]
   end
-  resources :students, except: [:index]
+  resources :students, only: [:show]
   resources :subjects
-  resources :messages, except: [:show]
+  resources :messages, except: [:show, :index]
   resources :articles
 
 end

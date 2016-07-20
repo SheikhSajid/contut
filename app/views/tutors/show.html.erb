@@ -7,11 +7,11 @@
   <%= image_tag @tutor.profile_picture.url(:thumb) %>
   
   <h2><%= "#{@tutor.fname} #{@tutor.lname}" %></h2>
-  <% if session[:student_id] %>
+  <% if student_signed_in? %>
     <%= link_to "Message", new_message_path({tutor_id: params[:id]}), class: "btn btn-primary" %>
   <% end %>
   
-  <% if tutor_signed_in? %>
+  <% if tutor_signed_in? || student_signed_in? %>
     <p>email: <%= @tutor.email %></p>
     <p>Phone: <%= @tutor.phone %></p>
   <% else %>
@@ -34,9 +34,9 @@
     </br><small><%=  time_ago_in_words(review.created_at) %> ago</small>
     <div class="star-rating" data-score=<%= review.rating %>></div>
     <%= review.comment %>
-    <% @already_reviewed = true if review.student_id == session[:student_id] %>
+    <% @already_reviewed = true if review.student_id == current_student.id %>
     
-    <% if session[:student_id] and @already_reviewed %>
+    <% if student_signed_in? and @already_reviewed %>
       <div class="edit-delete-review">
         <small><%= link_to "Edit", edit_tutor_review_path(@tutor, review) %></small>
         <small><%= link_to "Delete", tutor_review_path(@tutor, review), :method => :delete %> </small>
@@ -46,7 +46,7 @@
   </br></br>
   
   <!------------Add review button------------>
-  <% if !(@already_reviewed) and session[:student_id] %>
+  <% if !(@already_reviewed) and student_signed_in? %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>
@@ -59,7 +59,7 @@
       <p><%= subject.name.capitalize %>, Grade: <%= subject.grade %></p>
     <% end %>
     
-    <% if current_tutor.id == params[:id].to_i %>
+    <% if tutor_signed_in? && current_tutor.id == params[:id].to_i %>
       <p><%= link_to "Add New Subject", new_subject_path({tutor_id: params[:id]}) %></p>
     <% end %>
   </div>

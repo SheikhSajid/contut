@@ -1,4 +1,4 @@
-<% if session[:student_id] %>
+<% if student_signed_in? %>
   <% provide(:title, "#{@sender.fname} #{@sender.lname}") %>
 <% else %>
   <% provide(:title, "#{@sender.first_name} #{@sender.last_name}") %>
@@ -7,13 +7,13 @@
 <div align='center' id="message list">
   <% @messages.each do |msg| %>
     <p>
-      <% if session[:tutor_id] %>
+      <% if tutor_signed_in? %>
         <% if msg.sender_tutor %>
           You: <%= msg.message %>
         <% else %>
           <p><%= "#{@sender.first_name}:  #{msg.message}" %>
         <% end %>
-      <% elsif session[:student_id] %>
+      <% elsif student_signed_in? %>
         <% if msg.sender_student %>
           <p>You: <%= msg.message %>
         <% else %>
@@ -26,9 +26,9 @@
   </p>
 
 
-  <% if session[:student_id] %>
+  <% if student_signed_in? %>
     <%= link_to "New Message", new_message_path({tutor_id: params[:tutor_id]}), class: "btn btn-primary" %>
-  <% elsif session[:tutor_id] %>
+  <% elsif tutor_signed_in? %>
     <%= link_to "New Message", new_message_path({student_id: params[:student_id]}), class: "btn btn-primary" %>
   <% end %>
 </div>  

@@ -1,10 +1,9 @@
 class ReviewsController < ApplicationController
+  before_action :require_same_student, only: [:edit, :update, :destroy]
   before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_tutor
   before_action :require_student, only: [:new, :create]
-  before_action :require_same_student, only: [:edit, :update, :destroy]
-  
-  
+ 
   def new
     @review = Review.new
   end
@@ -50,7 +49,7 @@ class ReviewsController < ApplicationController
     end
     
     def require_same_student
-      if @review.student_id != session[:student_id]
+      if @review.student_id != current_student.id
         flash[:danger] = "Oops! You are not allowed to do that."
         redirect_to root_path
       end
