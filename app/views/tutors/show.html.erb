@@ -1,4 +1,4 @@
-<% provide(:title, "#{@tutor.fname} #{@tutor.lname}") %>
+<% provide(:title, "#{@tutor.name}") %>
 <% @already_reviewed = false %>
 <div class="row">
 
@@ -6,13 +6,18 @@
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
   <%= image_tag @tutor.profile_picture.url(:thumb) %>
   
-  <h2><%= "#{@tutor.fname} #{@tutor.lname}" %></h2>
+  <h2><%= "#{@tutor.name}" %></h2>
   <% if student_signed_in? %>
     <%= link_to "Message", new_message_path({tutor_id: params[:id]}), class: "btn btn-primary" %>
+    <% if !@request_sent && @request_accepted.empty? %>
+      <%= link_to "Send Request", request_path({tutor_id: params[:id]}), class: "btn btn-primary", method: :post %>
+    <% elsif @request_sent %>
+      <br /><br /><p><em>Request pending.</em></p>
+    <% end %>
   <% end %>
   
   <% if tutor_signed_in? || student_signed_in? %>
-    <p>email: <%= @tutor.email %></p>
+    <br /><p>email: <%= @tutor.email %></p>
     <p>Phone: <%= @tutor.phone %></p>
   <% else %>
     <p>Sign in to see contact informantion.</p>
@@ -46,7 +51,7 @@
   </br></br>
   
   <!------------Add review button------------>
-  <% if !(@already_reviewed) and student_signed_in? %>
+  <% if !(@already_reviewed) && student_signed_in? && @time_since_accepted > 1.month %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>

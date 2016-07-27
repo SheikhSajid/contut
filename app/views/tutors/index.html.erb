@@ -4,29 +4,31 @@
     <h2>Listing all Tutors</h2>
 </div>
 
-<% if !logged_in? %>
+<% unless logged_in? %>
   <p align="center">
-    <%= link_to "Register as a tutor", new_tutor_registration_path, class: "btn btn-primary" %>
+    <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary" %>
   </p>
 <% end %>
 
-<% @tutors.each do |tutor| %>
+
   
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <div class="well well-lg">
+  <div class="container">
+    <div class="row">
+    <% @tutors.each do |tutor| %>
+      <div class = "col-md-3">
         <%= image_tag tutor.profile_picture.url(:thumb) %>
         <div class="full-name">
         <%= link_to "#{tutor.fname} #{tutor.lname}", tutor_path(tutor) %>
         </div>
         <%= tutor.email %>
-        <div class="p_description">
+        <div>
           <%= truncate(tutor.description, length: 100) %>
         </div>
       </div>
+    <% end %>
     </div>
   </div>
-<% end %>
+
 
 
 

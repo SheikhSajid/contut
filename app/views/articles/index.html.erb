@@ -1,0 +1,36 @@
+<% provide(:title, "Articles") %>
+
+<div class="page-header">
+    <h2>Blog</h2>
+</div>
+
+<% if tutor_signed_in? %>
+  <p align="center">
+    <%= link_to "Add New Entry", new_article_path, class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<% @articles.each do |article| %>
+  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="full-name">
+        <%= link_to article.title, article_path(article) %>
+        </div>
+        <% writer = Tutor.find(article.tutor_id) %>
+        <small>By: <%= link_to "#{writer.fname} #{writer.lname}", tutor_path(writer.id) %></small>
+        
+        <div class="p_description">
+          <%= truncate(article.body, length: 250) %>
+        </div>
+        <% if current_tutor.id == article.tutor_id %>
+          <div class="edit-delete-review">
+            <small><%= link_to "Edit", edit_article_path(article) %></small>
+            <small><%= link_to "Delete", article_path(article), :method => :delete %> </small>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

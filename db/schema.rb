@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719071518) do
+ActiveRecord::Schema.define(version: 20160720170416) do
+
+  create_table "accepteds", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -29,6 +36,13 @@ ActiveRecord::Schema.define(version: 20160719071518) do
     t.datetime "updated_at",     null: false
     t.boolean  "sender_tutor"
     t.boolean  "sender_student"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -127,6 +141,7 @@ ActiveRecord::Schema.define(version: 20160719071518) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "email",                        default: "", null: false
+    t.string   "name",                                      null: false
   end
 
   add_index "tutors", ["confirmation_token"], name: "index_tutors_on_confirmation_token", unique: true

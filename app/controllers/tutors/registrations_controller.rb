@@ -40,12 +40,12 @@ class Tutors::RegistrationsController < Devise::RegistrationsController
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:fname, :lname, :gender, :rate, :description, :city, :area, :zip, :full_address, :phone, :profile_picture_file_name, :profile_picture_content_type, :profile_picture_file_size, :profile_picture_updated_at, :degree, :institution, :year])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :gender, :rate, :description, :city, :area, :zip, :full_address, :phone, :profile_picture_file_name, :profile_picture_content_type, :profile_picture_file_size, :profile_picture_updated_at, :degree, :institution, :year])
     end
   
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
-      devise_parameter_sanitizer.permit(:account_update, keys: [:fname, :lname, :gender, :rate, :description, :city, :area, :zip, :full_address, :phone, :degree, :institution, :year])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :gender, :rate, :description, :city, :area, :zip, :full_address, :phone, :degree, :institution, :year])
     end
 
     # The path used after sign up.

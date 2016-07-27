@@ -8,12 +8,21 @@ class PagesController < ApplicationController
   def contact
   end
   
-  # def signup
-  #   if logged_in?
-  #     flash[:success] = "You are already logged in as a user. Please log out to add a new user."
-  #     redirect_to root_path
-  #   end
-  # end
+  def search
+    if params[:search]
+      @tutors_found = Tutor.where("name LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @subject_tutors_found = []
+      @subjects_found = Subject.joins(:tutor).where("subjects.name LIKE ?", "%#{params[:search]}%")
+      # @subjects_found = Subject.where("subjects.name LIKE ?", "%#{params[:search]}%").includes(:tutor)
+      @subjects_found.each do |s|
+        @subject_tutors_found << s.tutor
+      end
+      
+      @tutors_found = @tutors_found.to_a + @subject_tutors_found
+    else
+      @search_results = Tutor.all
+    end
+  end
   
   def filter
     @subjects = Subject.select("DISTINCT name")

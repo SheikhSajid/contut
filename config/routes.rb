@@ -5,8 +5,13 @@ Rails.application.routes.draw do
   root    'pages#home'
   get     'about'     => 'pages#about'
   get     'contact'   => 'pages#contact'
+  get     'search'    => 'pages#search'
   get     'messages'  => 'messages#mymessages'
   get     'feed'      => 'messages#feed'
+  post    'request'   => 'requests#create_request'
+  get     'accept'    => 'requests#accept_request'
+  get     'request'   => 'requests#my_students'
+  delete  'request'   => 'requests#destroy'
 
   # Authentication
   # get     'login'     => 'sessions#new'
@@ -24,6 +29,9 @@ Rails.application.routes.draw do
   resources :students, only: [:show]
   resources :subjects
   resources :messages, except: [:show, :index]
+  
   resources :articles
+  
+  
 
 end

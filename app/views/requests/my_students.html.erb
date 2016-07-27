@@ -1,0 +1,54 @@
+<% provide(:title, "Students") %>
+
+<div class="page-header">
+    <h2>Connected</h2>
+</div>
+
+<% if @accepted_students.empty? %>
+  <em>You have no students.</em>
+<% end %>
+
+<% @accepted_students.each do |student| %>
+  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <%= image_tag student.profile_picture.url(:thumb) %>
+        <div class="full-name">
+        <%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %>
+        </div>
+        <%= student.email %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="page-header">
+    <h2>Requests</h2>
+</div>
+
+<% if @pending_students.empty? %>
+  <em>You have no pending requests.</em>
+<% end %>
+
+<% @pending_students.each do |student| %>
+  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <%= image_tag student.profile_picture.url(:thumb) %>
+        <div class="full-name">
+        <%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %>
+        </div>
+        <%= student.email %>
+        
+        <div class="edit-delete-review">
+          <small><%= link_to "Accept", accept_path({student_id: student.id}) %></small>
+          <small><%= link_to "Decline", request_path({student_id: student.id}), :method => :delete %> </small>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+  
+

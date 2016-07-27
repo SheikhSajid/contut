@@ -1,0 +1,23 @@
+<% provide(:title, "Search Results") %>
+
+<div class="page-header">
+    <h2>Results</h2>
+</div>
+
+<% @tutors_found.each do |tutor| %>
+  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <%= image_tag tutor.profile_picture.url(:thumb) %>
+        <div class="full-name">
+        <%= link_to "#{tutor.fname} #{tutor.lname}", tutor_path(tutor) %>
+        </div>
+        <%= tutor.email %>
+        <div class="p_description">
+          <%= truncate(tutor.description, length: 100) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
