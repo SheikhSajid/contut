@@ -1,23 +1,31 @@
 <% provide(:title, "Search Results") %>
 
-<div class="page-header">
-    <h2>Results</h2>
-</div>
-
-<% @tutors_found.each do |tutor| %>
+<div class="stickyfix container bg-gradient-yellow">
   
+  <h2 class="page-header">Results</h2>
+
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <div class="well well-lg">
-        <%= image_tag tutor.profile_picture.url(:thumb) %>
-        <div class="full-name">
-        <%= link_to "#{tutor.fname} #{tutor.lname}", tutor_path(tutor) %>
+  <% @tutors_found.each do |tutor| %>
+    <div class="col-md-4 col-sm-6 text-center">
+      <%= link_to(tutor_path(tutor), class: "card-link") do %>
+        <div class="card col-sm-10 col-sm-offset-1">
+          <%= image_tag tutor.profile_picture.url(:thumb), alt: "profile picture" %>
+          <p class="name"><%= tutor.name %></p>
+          <p><%= tutor.gender %></p>
+          <p>
+            <%= tutor.area %>,
+            <%= tutor.city %>
+          </p>
+          <p>
+            <%= tutor.degree %>,
+            <%= tutor.institution %>,
+            <%= tutor.year %>
+          </p>
+          <p><%= truncate(tutor.description, length: 60) %></p>
+          <p class="rate"><%= tutor.rate %> BDT/M</p>
         </div>
-        <%= tutor.email %>
-        <div class="p_description">
-          <%= truncate(tutor.description, length: 100) %>
-        </div>
-      </div>
+      <% end %>
     </div>
+  <% end %>
   </div>
-<% end %>
+</div>

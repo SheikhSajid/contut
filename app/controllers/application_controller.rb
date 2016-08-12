@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # before_action :configure_permitted_parameters, if: :devise_controller?
   
   helper_method :current_user, :logged_in?, :edit_profile, :go_to_profile, 
-                :require_tutor, :require_student, :logout
+                :require_tutor, :require_student, :logout, :admin_signed_in?
     
   # To keep some of the legacy code working, the following two methods are needed
   def current_user
@@ -57,13 +57,22 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def admin_signed_in?
+    session[:admin_id]
+  end
+  
   def logout
     if tutor_signed_in?
       return destroy_tutor_session_path
     elsif student_signed_in?
       return destroy_student_session_path
+    elsif admin_signed_in?
+      return admin_logout_path
     end
   end
+  
+  
+  
   # def opportunity(lambda1, lambda2)
   #   if lambda1.()
   #     @opportunities += 1

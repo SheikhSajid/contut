@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav id="main_nav" class="navbar navbar-default navbar-fixed-top bg-navy">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="nav navbar-header">
@@ -20,7 +20,7 @@
         <div class="input-group">
           <%= text_field_tag :search, params[:search], :class => 'form-control', :placeholder => "find your tutor" %>
           <span class="input-group-btn">
-            <%= submit_tag "Search", :name => nil, :class => "btn btn-default" %>
+            <%= submit_tag "Search", :name => nil, :class => "btn btn-ghost btn-inline btn-blue" %>
           </span>
         </div>
       <% end %>
@@ -49,16 +49,18 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
             
             <ul class="dropdown-menu">
+              <li><%= link_to "Upload New Certificate", new_certificate_path %></li>
               <li><%= link_to "Edit Profile", edit_profile %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to "Sign Out", logout, method: :delete %></li>
+              <li><%= link_to "Log Out", logout, method: :delete %></li>
             </ul>
           </li>
-        
+        <% elsif admin_signed_in? %>
+          <li><%= link_to "Log Out", logout, method: :delete %></li>
         <!-------------  LOGGED OUT  --------------> 
         <% else %>
           <li><%= link_to "Log In", new_tutor_session_path %></li>
-          <!--<li><%= link_to "Students Sign In", new_student_session_path %></li>-->
+          <li><%= link_to "Students Sign In", new_student_session_path %></li>
         <% end %>
       <!--/ul-->
     </div><!-- /.navbar-collapse -->

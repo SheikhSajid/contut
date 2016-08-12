@@ -1,6 +1,6 @@
 <% provide(:title, "#{@tutor.name}") %>
 <% @already_reviewed = false %>
-<div class="row">
+<div class="row stickyfix">
 
 <!------------Profile photo and info-------------->
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -28,8 +28,14 @@
 </div>
 
 <!--------ratings from the students-------------->
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 reviews">
-  <p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div>
+<div class="col-md-6 col-xs-12 reviews">
+  <% if !@tutor.approved %>
+    <em>This tutor's credentials has not been verified by our admins yet.</em>
+  <% else %>
+    <em>Verified account.</em>
+  <% end %>
+  
+  <br /><br /><p>Average rating: <div class="star-rating" data-score=<%= @avg_review %>></div>
   <em><%= "#{number_of_reviews}" %></em></p></br>
   
   <!-----Print all the reviews----->
@@ -51,7 +57,7 @@
   </br></br>
   
   <!------------Add review button------------>
-  <% if !(@already_reviewed) && student_signed_in? && @time_since_accepted > 1.month %>
+  <% if !(@already_reviewed) && student_signed_in? && @time_since_accepted && @time_since_accepted > 1.month %>
     <p><%= link_to "Write a review", new_tutor_review_path(@tutor), class: "btn btn-primary" %></p>
   <% end %>
 </div>

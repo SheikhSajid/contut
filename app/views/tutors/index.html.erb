@@ -1,31 +1,40 @@
 <% provide(:title, "Tutors") %>
 
-<div class="page-header">
-    <h2>Listing all Tutors</h2>
-</div>
-
-<% unless logged_in? %>
-  <p align="center">
-    <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary" %>
-  </p>
-<% end %>
-
-
-  
-  <div class="container">
-    <div class="row">
-    <% @tutors.each do |tutor| %>
-      <div class = "col-md-3">
-        <%= image_tag tutor.profile_picture.url(:thumb) %>
-        <div class="full-name">
-        <%= link_to "#{tutor.fname} #{tutor.lname}", tutor_path(tutor) %>
-        </div>
-        <%= tutor.email %>
-        <div>
-          <%= truncate(tutor.description, length: 100) %>
-        </div>
-      </div>
+  <div class="stickyfix container bg-gradient-yellow">
+    
+    <h2 class="page-header">Listing all Tutors</h2>
+    
+    <% if !student_signed_in? && !tutor_signed_in? && !admin_signed_in? %>
+      <p align="center">
+        <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost btn-dark" %>
+      </p>
+      <br>
     <% end %>
+        
+    <div class="row">
+      <% @tutors.each do |tutor| %>
+        <div class="col-md-4 col-sm-6 text-center">
+          <%= link_to(tutor_path(tutor), class: "card-link") do %>
+            <div class="card col-sm-10 col-sm-offset-1">
+              <%= image_tag tutor.profile_picture.url(:thumb), alt: "profile picture" %>
+              <p class="name"><%= tutor.name %></p>
+              <p><%= tutor.gender %></p>
+              <p>
+                <%= tutor.area %>,
+                <%= tutor.city %>
+              </p>
+              <p>
+                <%= tutor.degree %>,
+                <%= tutor.institution %>,
+                <%= tutor.year %>
+              </p>
+              <p><%= truncate(tutor.description, length: 60) %></p>
+              <p class="rate"><%= tutor.rate %> BDT/M</p>
+            </div>
+          <% end %>
+        </div>
+        
+      <% end %>
     </div>
   </div>
 

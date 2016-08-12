@@ -14,3 +14,234 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .bg-purple {
+   background-color: #191970;
+ }
+ 
+ .bg-blue {
+   background-color: #4876FF;
+ }
+ 
+ .bg-navy {
+   background-color: #0030B2;
+ }
+ 
+ .bg-mustard {
+   background-color: #FFC125;
+ }
+ 
+ .bg-soft-red {
+   background-color: #DC3667;
+ }
+ 
+ .bg-yellow {
+   background-color: #FFD801;
+ }
+ 
+
+.bg-gradient-yellow {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffd801+2,ffd801+2,ffc125+65 */
+background: rgb(255,216,1); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(255,216,1,1) 2%, rgba(255,216,1,1) 2%, rgba(255,193,37,1) 65%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,216,1,1) 2%,rgba(255,216,1,1) 2%,rgba(255,193,37,1) 65%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center,  rgba(255,216,1,1) 2%,rgba(255,216,1,1) 2%,rgba(255,193,37,1) 65%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd801', endColorstr='#ffc125',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+html, body {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4rem;
+}
+
+#main_nav {
+  border: none;
+  border-radius: 0;
+  height: 3rem;
+  color: #FFF;
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+#main_nav a:hover, #main_nav a:active {
+  background-color: #4876FF;
+  color: #FFF;
+}
+
+#main_nav > * {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.85rem;
+}
+
+#main_nav .navbar-brand {
+  color: #FFF;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #FFF;
+}
+
+.stickyfix {
+  margin-top: 3rem;
+}
+
+#banner {
+  height: calc(100vh - 3rem);
+}
+
+#banner section {
+  height: 100%;
+}
+
+#banner-pic {
+  height: calc(100vh - 3rem);
+  background: url("tutor.jpg"), no-repeat;
+  background-position: 0 -280px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: baseline;
+  color: #FFF;
+}
+
+#banner-pic section {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#banner-pic .btn {
+  margin: 1rem;
+}
+
+.headline {
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin-top: 30vh;
+  font-weight: 700;
+}
+
+.page-header {
+  padding: 2rem 2rem 0.5rem 2rem;
+}
+
+
+.form-control {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+}
+
+.btn-ghost {
+  text-transform: uppercase;
+  color: #fff;
+  border: 2px solid #fff;
+  outline: none;
+  text-decoration: none;
+  background: transparent;
+  border-radius: 5px;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+  background-color: #191970;
+  border-color: #191970;
+  color: #fff;
+  transition: color 0.2s ease-in, background-color 0.2s ease-in, border-color 0.2s ease-in;
+}
+
+.btn-inline {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.btn-blue:hover,
+.btn-blue:active {
+  background-color: #4876FF;
+  border-color: #4876FF;
+}
+
+.btn-dark {
+  color: #191970;
+  border-color: #191970;
+}
+
+.card-link  {
+  text-decoration: none;
+  color: #333;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.card {
+    padding: 20px;
+    background: #FFF;
+    border-radius: 10px;
+    /*min-width: 50%;*/
+    height: 20rem;
+    margin-bottom: 7rem ;
+    border-bottom: 15px solid #191970;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  -webkit-box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.rate {
+  font-weight: 500;
+  font-size: 1.28rem;
+}
+
+.footer {
+    background-color: #0030B2;
+    color: #FFF;
+    vertical-align: bottom;
+    padding-top: 10vh;
+    /*position: absolute;*/
+    /*bottom: 0%;*/
+    /*width: 100%;*/
+}
+
+.footer ul {
+  padding: 0;
+}
+
+
+.footer li, .footer a {
+  text-decoration: none;
+  list-style: none;
+  color: #FFF;
+  font-size: 0.8rem;
+  font-weight: 400;
+  display: inline-block;
+  padding: 2rem 0 2rem;
+}
+
+.footer a {
+  line-height: 1rem;
+  padding: 1rem 1rem;
+}
+
+.footer a:hover, .footer a:visited {
+  text-decoration: none;
+  color: #FFF;
+  background-color: #4876FF;
+}
+
+.heart:before {
+  content: '\2665';
+  color: red;
+}

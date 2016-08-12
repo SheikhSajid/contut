@@ -1,11 +1,11 @@
-<div class='row'>
+<div class='row stickyfix bg-gradient-yellow'>
   <h2 class="text-center text-uppercase">Tutor Sign up</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{ class: "form col-md-6 col-md-offset-3"}) do |f| %>
     <%= devise_error_messages! %>
   
     <div class = "form-group">
       <%= f.label(:profile_picture) %>
-      <label class="btn btn-default btn-file">
+      <label class="btn btn-ghost btn-file">
        Browse <%= f.file_field :profile_picture, class: "hidden" %>
       </label>
     </div>
@@ -35,7 +35,7 @@
     
     <div class="form-group">
       <%= f.label(:phone) %>
-      <%= f.number_field :phone, :placeholder => "Phone Number", class: "form-control" %>
+      <%= f.number_field :phone, :placeholder => "Phone Number", class: "form-control", required: true %>
     </div>
     
     <div class="form-group"> 
@@ -48,19 +48,19 @@
     
     <div class="form-group">
       <%= f.label(:city) %>
-      <%= f.text_field :city, :placeholder => "City", class: "form-control" %>
+      <%= f.text_field :city, :placeholder => "City", class: "form-control", required: true %>
     </div>
     
     <div class="form-group">
       <%= f.label(:area) %>
-      <%= f.text_field :area, :placeholder => "Area", class: "form-control" %>
+      <%= f.text_field :area, :placeholder => "Area", class: "form-control", required: true %>
     </div>
   
     <div class="form-group">
       <%= f.label(:zip) %>
-      <%= f.text_field :zip, :placeholder => "Zip Code", class: "form-control" %>
+      <%= f.text_field :zip, :placeholder => "Zip Code", class: "form-control", required: true %>
     </div>
-    
+   
     <div class="form-group">
       <%= f.label(:full_address) %>
       <%= f.text_area :full_address, :placeholder => "Full Address", class: "form-control" %>
@@ -91,8 +91,8 @@
       <%= f.number_field :rate, :placeholder => "Rate", class: "form-control", required: true %>
     </div>
   
-    <%= f.submit "Sign up", class: "btn btn-default" %>
-    
+    <%= f.submit "Sign up", class: "btn btn-ghost" %>
+    <br><br><br>
   <% end %>
 </div>
 

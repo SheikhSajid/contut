@@ -1,8 +1,8 @@
 <% provide(:title, "Subjects") %>
-<div class="page-header">
+<div class="page-header stickyfix">
     <h2>Available subjects</h2>
 </div>
 
 <% @subjects.each do |subject| %>
-  <p><%= link_to subject.name, filtered_results_path({name: subject.name}), class: 'btn btn-primary btn-lg' %></p>
+  <p><%= link_to subject.name, filtered_results_path({name: subject.name}), class: 'btn btn-ghost btn-dark btn-lg' %></p>
 <% end %>

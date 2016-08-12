@@ -34,20 +34,35 @@
 <!--  </a>-->
 <!--</div>-->
 
-<div class = "row">
-  <section class = "col-md-7 bg-danger">
-    <h1>Find a great tutor near you!</h1>
-    <% if !tutor_signed_in? and !student_signed_in? %> 
-      <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-primary" %>
-    <% end %>
-  </section>
-  <section class = "col-md-5 bg-success">
-    <h1>Have a passion for teaching?</h1>
-    <% if !tutor_signed_in? and !student_signed_in? %> 
-      <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary" %>
-    <% end %>
+<div id="banner-pic" class = "row stickyfix">
+  <section>
+    <h1 class="headline col-md-8 col-md-offset-2">The new smarter & faster way to discover tutors</h1>
+    <p class="col-md-8 col-md-offset-2">
+      <% if !tutor_signed_in? and !student_signed_in? %> 
+          <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-ghost" %>
+          <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost" %>
+      <% end %>
+    </p>
   </section>
 </div>
+
+
+
+<!--<div id="banner" class = "row stickyfix">-->
+<!--  <section class = "col-md-7 bg-yellow">-->
+<!--    <h1>Find a great tutor near you!</h1>-->
+<!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
+<!--      <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-ghost" %>-->
+<!--    <% end %>-->
+<!--  </section>-->
+<!--  <section class = "col-md-5 bg-soft-red">-->
+<!--    <h1>Have a passion for teaching?</h1>-->
+<!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
+<!--      <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost" %>-->
+<!--    <% end %>-->
+<!--  </section>-->
+<!--</div>-->
+
 
 
 <article class = "container">

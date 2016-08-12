@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
   end
   
   def create
-    student = Student.find_by(email: params[:session][:email].downcase)
+    admin = Admin.find_by(email: params[:session][:email].downcase)
    
-    if student and student.authenticate(params[:session][:password])
-      session[:student_id] = student.id
-      flash[:success] = "You are now logged in as a student"
+    if admin and admin.authenticate(params[:session][:password])
+      session[:admin_id] = admin.id
+      flash[:success] = "You are now logged in as an admin"
       redirect_to root_path
     else
       flash.now[:danger] = "Incorrect email/password combination"
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:student_id] = nil;
+    session[:admin_id] = nil;
     redirect_to root_path
   end
 end

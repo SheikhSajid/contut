@@ -1,0 +1,17 @@
+<% provide(:title, "Tutor authentication") %>
+
+<% @tutors.each do |tutor| %>
+  
+  <div class = 'row'>
+  <%= link_to "#{tutor.name}", tutor_path(tutor) %>
+  
+  <% tutor.certificates.each do |certificate| %>
+    <%= image_tag certificate.photo.url(:large) %>
+    <div class="edit-delete-review">
+      <small><%= link_to "Accept", approve_certificate_path({id: certificate.id}) %></small>
+      <small><%= link_to "Decline", decline_certificate_path({id: certificate.id}) %> </small>
+    </div>
+  <% end %>
+  
+  </div>
+<% end %>

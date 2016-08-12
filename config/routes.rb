@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admins/new'
+
   devise_for :students, controllers: { registrations: 'students/registrations' }
   devise_for :tutors, controllers: { registrations: 'tutors/registrations' }
   
@@ -8,15 +10,17 @@ Rails.application.routes.draw do
   get     'search'    => 'pages#search'
   get     'messages'  => 'messages#mymessages'
   get     'feed'      => 'messages#feed'
+  
+  # Requests
   post    'request'   => 'requests#create_request'
   get     'accept'    => 'requests#accept_request'
   get     'request'   => 'requests#my_students'
   delete  'request'   => 'requests#destroy'
 
-  # Authentication
-  # get     'login'     => 'sessions#new'
-  # post    'login'     => 'sessions#create'
-  # delete  'logout'    => 'sessions#destroy'
+  # Admin Authentication
+  get     'admin_login'     => 'sessions#new'
+  post    'admin_login'     => 'sessions#create'
+  delete  'admin_logout'    => 'sessions#destroy'
   
   # Filters
   get     'filter_by_subject' => 'pages#filter'
@@ -32,6 +36,8 @@ Rails.application.routes.draw do
   
   resources :articles
   
-  
+  resources :certificates, except: [:destroy]
+  get 'approve_certificate' => 'certificates#approve'
+  get 'decline_certificate' => 'certificates#decline'
 
 end

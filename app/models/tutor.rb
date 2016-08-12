@@ -17,12 +17,13 @@ class Tutor < ActiveRecord::Base
          :lockable
          
   # Associations
-  has_many :reviews,   dependent: :destroy
-  has_many :subjects,  dependent: :destroy
-  has_many :messages,  dependent: :destroy
-  has_many :articles,  dependent: :destroy
-  has_many :requests,  dependent: :destroy
-  has_many :accepteds, dependent: :destroy
+  has_many :reviews,      dependent: :destroy
+  has_many :subjects,     dependent: :destroy
+  has_many :messages,     dependent: :destroy
+  has_many :articles,     dependent: :destroy
+  has_many :certificates, dependent: :destroy
+  has_many :requests,     dependent: :destroy
+  has_many :accepteds,    dependent: :destroy
   has_many :student_requests,  through: :requests,  source: :student
   has_many :accepted_students, through: :accepteds, source: :student
   

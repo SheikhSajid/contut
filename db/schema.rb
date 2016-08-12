@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720170416) do
+ActiveRecord::Schema.define(version: 20160727164627) do
 
   create_table "accepteds", force: :cascade do |t|
     t.integer  "tutor_id"
@@ -20,12 +20,30 @@ ActiveRecord::Schema.define(version: 20160720170416) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "certificates", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -112,8 +130,8 @@ ActiveRecord::Schema.define(version: 20160720170416) do
     t.string   "area"
     t.integer  "zip"
     t.text     "full_address"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "phone"
     t.string   "profile_picture_file_name"
     t.string   "profile_picture_content_type"
@@ -124,11 +142,11 @@ ActiveRecord::Schema.define(version: 20160720170416) do
     t.integer  "year"
     t.string   "curr_employer"
     t.string   "position"
-    t.string   "encrypted_password",           default: "", null: false
+    t.string   "encrypted_password",           default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                default: 0,  null: false
+    t.integer  "sign_in_count",                default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -137,11 +155,13 @@ ActiveRecord::Schema.define(version: 20160720170416) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",              default: 0,  null: false
+    t.integer  "failed_attempts",              default: 0,     null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.string   "email",                        default: "", null: false
-    t.string   "name",                                      null: false
+    t.string   "email",                        default: "",    null: false
+    t.string   "name",                                         null: false
+    t.boolean  "approved",                     default: false
+    t.boolean  "pending_approval",             default: false
   end
 
   add_index "tutors", ["confirmation_token"], name: "index_tutors_on_confirmation_token", unique: true

@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   def home
+    if admin_signed_in?
+      redirect_to certificates_path
+    end
   end
 
   def about
