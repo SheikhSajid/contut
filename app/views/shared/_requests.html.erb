@@ -1,0 +1,33 @@
+<!--Connected users row-->
+<div class="row section">
+  <div class="row"><h2>Connected</h2></div>
+  <% if connected.empty? %>
+    <em class="empty-msg">You are not connected to anyone.</em>
+  <% end %>
+  
+  <div class="row">
+    <% connected.each do |user| %>
+      <% type = "accepted" %>
+      <div class="col-md-3 col-sm-4">
+        <%= render partial: "shared/card", locals: {user: user, type: type} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!--Requests sent/received-->
+<div class="row section">
+  <div class="row"><h2>Requests</h2></div>
+  <% if pending.empty? %>
+    <em class="empty-msg">You have no requests pending.</em>
+  <% end %>
+  
+  <div class="row">
+    <% pending.each do |user| %>
+      <% type = "pending" %>
+      <div class="col-md-3 col-sm-4">
+        <%= render partial: "shared/card", locals: {user: user, type: type} %>
+      </div>
+    <% end %>
+  </div>
+</div>

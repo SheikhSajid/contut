@@ -1,0 +1,199 @@
+<div id="profile" class="row">
+  <!--id = params[:student_id/:tutor_id]-->
+  
+  <!------------Profile photo and info-------------->
+  <div id="left-panel" class="col-sm-2 col-xs-11">
+    <div class="row">  
+      <% if user.profile_picture_file_name %>
+        <%= image_tag(user.profile_picture.url(:medium), :class => "profile-image center-block") %>
+      <% else %>
+        <%= image_tag "graduation-hat-icon-77155.png", :class => "profile-image center-block" %>
+      <% end %>
+      
+      <% if type == "tutor" %>
+        <h1><%= "#{user.name}" %></h1>
+        <div class="col-sm-12">
+  				<% if !user.approved %>
+            <em><span class="glyphicon glyphicon-remove"></span> This user's credentials has not been verified by our admins yet.</em>
+          <% else %>
+            <em><span class="glyphicon glyphicon-ok"></span> Verified account.</em>
+          <% end %>
+        </div>
+      <% else %>
+        <h1><%= "#{user.first_name} #{user.last_name}" %></h1>
+      <% end %>
+ 
+      <div class="col-sm-12 text-center">
+        <% if student_signed_in? && type == "tutor" %>
+          <%= link_to "Message", new_message_path({tutor_id: id}), class: "btn btn-primary" %>
+          <% if !request_sent && request_accepted.empty? %>
+            <%= link_to "Send Request", request_path({tutor_id: id}), class: "btn btn-primary", method: :post %>
+          <% elsif request_sent %>
+            <br /><br /><p><em>Request pending.</em></p>
+          <% end %>
+        <% elsif tutor_signed_in? && type == "student" %>
+          <% if request_received || request_accepted %>
+            <%= link_to "Message", new_message_path({student_id: id}), class: "btn btn-primary" %>
+            
+            <% if request_received %>
+              <%= link_to "Accept Request", accept_path({student_id: id}), class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <!--General Info Under The Profile Photo-->
+      <div class="col-sm-12" >
+        <% if tutor_signed_in? || student_signed_in? %>
+          <ul class="profile-details">
+            <li>
+  						<div>E-mail</div>
+  						<%= user.email %>
+  					</li>
+  					
+  					<li>
+  						<div>Phone</div>
+  						<%= user.phone %>
+  					</li>
+  					
+  					<li>
+  						<div>City</div>
+  						<%= user.city %>
+  					</li>
+  					
+  					<li>
+  						<div>Area</div>
+  						<%= user.area %>
+  					</li>
+  					
+  					<li>
+  						<div>Gender</div>
+  						<%= user.gender %>
+  					</li>
+  				</ul>
+        <% else %>
+          <p>Sign in to see contact informantion.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!----------Tabbed Details Panel-------------->
+  <div id="details-panel" class="col-sm-10">
+    <!--Tabs-->
+    <ul class="nav nav-tabs" role="tablist" id="myTab">
+	  	<li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+	  	
+	  	<% if type == "tutor" %>
+	  	  <li><a href="#" role="tab" data-toggle="tab">Students</a></li>
+	  	<% end %>
+	  	
+	  	<li><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+		</ul>
+    
+    <!--Content-->
+    <div class="tab-content">
+      <!--Details-->
+      <div class="tab-pane active" id="details">
+        <div class="row">
+          
+          <% if type == "tutor" %>
+            
+            <div class="col-sm-11">
+              <p>Average rating: <%= user.avg %><br />
+              <em><%= "#{user.no_of_reviews} reviews" %></em></p>
+            </div>
+            
+            <div class="col-sm-11">
+  						<h2>About Me</h2>
+              <p><%= user.description %></p>
+            </div>
+         
+            <div class="col-sm-11">  
+              <h2>Subjects taught:</h2>
+              <ul>
+                <% subjects.each do |subject| %>
+                  <li><%= subject.name.capitalize %>, Grade: <%= subject.grade %></li>
+                <% end %>
+              </ul>
+        
+              <% if tutor_signed_in? && current_tutor.id == id.to_i %>
+                <p><%= link_to "Add New Subject", new_subject_path({user_id: id}) %></p>
+              <% end %>
+            </div>
+              
+            <div class="col-sm-11">
+              <h2>Education:</h2>
+                <p><%= user.degree %></p>
+                <p><%= user.institution %></p>
+                <p><%= user.year %></p>
+            </div>
+          <% else %>
+            <div class="col-sm-11">
+              <p><%= user.institution %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <!--Reviews-->
+      <div class="tab-pane" id="reviews">
+        <div class="row">
+          <% if type == "tutor" %>
+            <!--------ratings from the students-------------->
+            <div class="col-md-6 col-xs-12" id ="reviews">
+              <!-----Print all the reviews----->
+              <% if user.no_of_reviews == 0 %>
+                <em>There are no student reviews for this user.</em>
+              <% end %>
+              
+              <% reviews.each do |review| %>
+                
+                <p>
+                  <% student = Student.find(review.student_id) %>
+                  
+                  <%= link_to student.first_name + " " + student.last_name, student_path(student) %>
+                  </br><small><%=  time_ago_in_words(review.created_at) %> ago</small>
+                  <div class="star-rating" data-score=<%= review.rating %>></div>
+                  <%= review.comment %>
+                
+                
+                  <% already_reviewed = true if (student_signed_in? && review.student_id == current_student.id) %>
+                  <% if student_signed_in? and already_reviewed %>
+                    <div class="edit-delete-review">
+                      <small><%= link_to "Edit", edit_tutor_review_path(user, review) %></small>
+                      <small><%= link_to "Delete", tutor_review_path(user, review), :method => :delete %> </small>
+                    </div>
+                  <% end %>
+                
+                </p>
+              
+              <% end %>
+              </br></br>
+              
+              <!------------Add review button------------>
+              <% if !(already_reviewed) && student_signed_in?%>
+                <p><%= link_to "Write a review", new_tutor_review_path(user), class: "btn btn-primary" %></p>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="col-md-6 col-xs-12" id ="reviews">
+               
+                <% @reviews.each do |review| %>
+                  <p><% tutor = Tutor.find(review.tutor_id) %>
+                  <%= link_to tutor.name, tutor_path(tutor) %>
+                  <%=  time_ago_in_words(review.created_at) %> ago
+                  <div class="star-rating" data-score=<%= review.rating %>></div>
+                  <%= review.comment %>
+                <% end %></p>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+</div>
+

@@ -16,18 +16,12 @@ class TutorsController < ApplicationController
     @request_accepted = false
     
     if student_signed_in?
-      @request_sent = Request.already_sent? params[:id], current_student.id
+      @request_sent = Request.pending? params[:id], current_student.id
       @request_accepted = Accepted.where("tutor_id = ? AND student_id = ?", params[:id], current_student.id)
       
       if @request_accepted.any?
         @time_since_accepted = Time.now - @request_accepted.first.created_at
       end
-    end
-    
-    if @reviews.blank?
-      @avg_review = 0
-    else
-      @avg_review = @reviews.average(:rating).round(1)
     end
   end
   

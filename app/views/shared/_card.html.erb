@@ -1,0 +1,45 @@
+
+<!---- http://getbootstrap.com/components/#thumbnails-custom-content ---->
+<div class="thumbnail card">
+  <% if user.profile_picture_file_name %>
+    <%= image_tag user.profile_picture.url(:medium) %>
+  <% else %>
+    <%= image_tag "graduation-hat-icon-77155.png" %>
+  <% end %>
+  
+  <div class="caption text-center">
+    <% if tutor_signed_in? && type != "tutor_list" %>
+      <h4><%= link_to "#{user.first_name} #{user.last_name}", student_path(user) %></h4>
+    <% elsif student_signed_in? || type == "tutor_list" %>
+      <h4><%= link_to "#{user.name}", tutor_path(user) %></h4>
+    <% end %>
+  
+    <p>
+      <p><%= user.institution %></p>
+      
+      <p><%= user.gender %></p>
+      
+      <p><span class="glyphicon glyphicon-map-marker"></span><%= "#{user.area}, #{user.city}" %></p>
+      
+      
+      
+    </p>
+    
+    <% if tutor_signed_in? && type == "pending" %>
+      <p>
+        <%= link_to "Accept", accept_path({student_id: user.id}), class: "btn btn-primary" %>
+        <%= link_to "Decline", request_path({student_id: user.id}), :method => :delete, class: "btn btn-danger" %>
+      </p>
+    <% elsif student_signed_in? && type == "pending" %>
+      <p><%= link_to "Delete Request", request_path({tutor_id: user.id}), :method => :delete, class: "btn btn-danger" %><br />
+      Rating: <%= user.avg %></p>
+    <% elsif student_signed_in? || type == "tutor_list" %>    
+      <% if user.avg >= 3.5 || user.no_of_reviews == 0 %>
+        <p>Rating: <%= user.avg %> <em>(<%= user.no_of_reviews %>) reviews</em> <span class="glyphicon glyphicon-thumbs-up"></span></p>
+      <% else %>
+        <p>Rating: <%= user.avg %> <em>(<%= user.no_of_reviews %>) reviews</em> <span class="glyphicon glyphicon-thumbs-down"></span><br />
+      <% end %>
+      <p>Rate: <%= user.rate %> BDT</p>
+    <% end %>
+  </div>
+</div>

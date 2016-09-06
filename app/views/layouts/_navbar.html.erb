@@ -1,4 +1,4 @@
-<nav id="main_nav" class="navbar navbar-default navbar-fixed-top bg-navy">
+<nav id="main_nav" class="navbar navbar-default" style="border-radius:0px;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="nav navbar-header">
@@ -8,24 +8,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "contut", root_path, class: "navbar-brand", id: "logo" %>
+      <%= link_to "Contut", root_path, class: "navbar-brand", id: "logo" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+        
+    <!--------------  Search  ----------------->
+    <%= form_tag search_path, :class => 'navbar-form navbar-left', :method => 'get' do %>
+      <div class="input-group">
+        <%= text_field_tag :search, params[:search], :class => 'form-control', :placeholder => "find your tutor" %>
+        <span class="input-group-btn">
+          <%= button_tag(type: "submit", class: "btn btn-default") do %>
+            <span class="glyphicon glyphicon-search"></span>
+          <% end %>
+        </span>
+      </div>
+    <% end %>
     
     <div class="nav navbar-nav navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      <!--------------  Search  ----------------->
-      <%= form_tag search_path, :class => 'navbar-form navbar-left', :method => 'get' do %>
-        <div class="input-group">
-          <%= text_field_tag :search, params[:search], :class => 'form-control', :placeholder => "find your tutor" %>
-          <span class="input-group-btn">
-            <%= submit_tag "Search", :name => nil, :class => "btn btn-ghost btn-inline btn-blue" %>
-          </span>
-        </div>
-      <% end %>
-      
-
       <!------------- Navbar right -------------->
       <!--ul class="nav navbar-nav navbar-right"-->
         <li class="dropdown">
@@ -40,13 +40,32 @@
         
         <!-------------  LOGGED IN  -------------->
         <% if tutor_signed_in? || student_signed_in? %>
-          <li><%= link_to "Students", request_path %></li>
-          <li><%= link_to "Messages", messages_path %></li>
-          <li><%= link_to "My Profile", go_to_profile %></li>          
+          <!-------- navbar icons --------->
+          
+          <!--Show requests icon only if tutor logged in-->
+          <% if tutor_signed_in? %>
+            <li>
+              <%= link_to request_path, title: 'Connections', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          
+          <li>
+            <%= link_to messages_path, title: 'Messages', 'data-toggle' => 'tooltip', 'data-placement' => 'right'  do %>
+              <span class="glyphicon glyphicon-envelope"></span>
+            <% end %>
+          </li>
+          
+          <li>
+            <%= link_to go_to_profile, title: 'My Profile', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
+              <span class="glyphicon glyphicon-list-alt"></span>
+            <% end %>
+          </li>          
           
           <!-------------  SETTINGS DROPDOWN  -------------->
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false", title="Settings", data-toggle="tooltip", data-placement="right"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
             
             <ul class="dropdown-menu">
               <li><%= link_to "Upload New Certificate", new_certificate_path %></li>

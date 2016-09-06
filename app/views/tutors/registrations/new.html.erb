@@ -1,99 +1,106 @@
-<div class='row stickyfix bg-gradient-yellow'>
-  <h2 class="text-center text-uppercase">Tutor Sign up</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{ class: "form col-md-6 col-md-offset-3"}) do |f| %>
-    <%= devise_error_messages! %>
+<div class='row'>
+    
   
-    <div class = "form-group">
-      <%= f.label(:profile_picture) %>
-      <label class="btn btn-ghost btn-file">
-       Browse <%= f.file_field :profile_picture, class: "hidden" %>
-      </label>
-    </div>
+  <div class="col-sm-4"></div>
   
-    <div class = "form-group">
-      <%= f.label(:email) %>
-      <%= f.email_field :email, autofocus: true, :placeholder => "Email", class: "form-control", required: true %>
-    </div>
+  <div class="col-sm-4">  
+    <h2 class="text-center text-uppercase">Tutor Sign up</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class = "form-group">
+        <%= f.label(:email) %>
+        <%= f.email_field :email, autofocus: true, :placeholder => "Email", class: "form-control", required: true %>
+      </div>
+      
+      <div class = "form-group">
+        <%= f.label(:profile_picture) %>
+        <%= f.file_field :profile_picture %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label(:password) %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", :placeholder => "Password", class: "form-control", required: true %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label(:password_confirmation, "Confirm Password") %>
+        <%= f.password_field :password_confirmation,autocomplete: "off", :placeholder => "Confirm Password", class: "form-control", required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:name) %>
+        <%= f.text_field :name, :placeholder => "Full name", class: "form-control", required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:phone) %>
+        <%= f.number_field :phone, :placeholder => "Phone Number", class: "form-control", required: true %>
+      </div>
+      
+      <div class="form-group"> 
+        <%= f.label(:gender) %><br>
+        <%= f.label(:gender, "Male", value: "Male") %>
+        <%= f.radio_button(:gender, "Male", checked: true) %>
+        <%= f.label(:gender, "Female", value: "Female") %>
+        <%= f.radio_button(:gender, "Female") %>
+      </div>  
+      
+      <div class="form-group">
+        <%= f.label(:city) %>
+        <%= f.text_field :city, :placeholder => "City", class: "form-control", required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:area) %>
+        <%= f.text_field :area, :placeholder => "Area", class: "form-control", required: true %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label(:zip) %>
+        <%= f.text_field :zip, :placeholder => "Zip Code", class: "form-control", required: true %>
+      </div>
+     
+      <div class="form-group">
+        <%= f.label(:full_address) %>
+        <%= f.text_area :full_address, :placeholder => "Full Address", class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:degree) %>
+        <%= f.text_field :degree, :placeholder => "Highest degree earned", class: "form-control", required: true %>
+      </div>
+    
+      <div class="form-group">
+        <%= f.label(:institution) %>
+        <%= f.text_field :institution, :placeholder => "Institution", class: "form-control", required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:year) %>
+        <%= f.number_field :year, :placeholder => "Year", class: "form-control", required: true %>
+      </div> 
+      
+      <div class="form-group">
+        <%= f.label(:description) %>
+        <%= f.text_area :description, :placeholder => "Description", class: "form-control"%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label(:rate) %>
+        <%= f.number_field :rate, :placeholder => "Rate", class: "form-control", required: true %>
+      </div>
+    
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
+      
+      <%= render "tutors/shared/links" %>
+    <% end %>
+  </div>
   
-    <div class="form-group">
-      <%= f.label(:password) %>
-      <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off", :placeholder => "Password", class: "form-control", required: true %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label(:password_confirmation, "Confirm Password") %>
-      <%= f.password_field :password_confirmation,autocomplete: "off", :placeholder => "Confirm Password", class: "form-control", required: true %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:name) %>
-      <%= f.text_field :name, :placeholder => "Full name", class: "form-control", required: true %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:phone) %>
-      <%= f.number_field :phone, :placeholder => "Phone Number", class: "form-control", required: true %>
-    </div>
-    
-    <div class="form-group"> 
-      <%= f.label(:gender) %><br>
-      <%= f.label(:gender, "Male", value: "Male") %>
-      <%= f.radio_button(:gender, "Male", checked: true) %>
-      <%= f.label(:gender, "Female", value: "Female") %>
-      <%= f.radio_button(:gender, "Female") %>
-    </div>  
-    
-    <div class="form-group">
-      <%= f.label(:city) %>
-      <%= f.text_field :city, :placeholder => "City", class: "form-control", required: true %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:area) %>
-      <%= f.text_field :area, :placeholder => "Area", class: "form-control", required: true %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label(:zip) %>
-      <%= f.text_field :zip, :placeholder => "Zip Code", class: "form-control", required: true %>
-    </div>
-   
-    <div class="form-group">
-      <%= f.label(:full_address) %>
-      <%= f.text_area :full_address, :placeholder => "Full Address", class: "form-control" %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:degree) %>
-      <%= f.text_field :degree, :placeholder => "Highest degree earned", class: "form-control", required: true %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label(:institution) %>
-      <%= f.text_field :institution, :placeholder => "Institution", class: "form-control", required: true %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:year) %>
-      <%= f.number_field :year, :placeholder => "Year", class: "form-control", required: true %>
-    </div> 
-    
-    <div class="form-group">
-      <%= f.label(:description) %>
-      <%= f.text_area :description, :placeholder => "Description", class: "form-control"%>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label(:rate) %>
-      <%= f.number_field :rate, :placeholder => "Rate", class: "form-control", required: true %>
-    </div>
-  
-    <%= f.submit "Sign up", class: "btn btn-ghost" %>
-    <br><br><br>
-  <% end %>
+  <div class="col-sm-4"></div>
 </div>
 
-<%= render "tutors/shared/links" %>
+

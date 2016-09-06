@@ -13,7 +13,11 @@ class ReviewsController < ApplicationController
     @review.student_id = current_user.id
     @review.tutor_id = @tutor.id
     
-    if @review.save
+    @tutor.no_of_reviews += 1
+    @tutor.avg = (@tutor.avg + @review.rating) / @tutor.no_of_reviews
+    @tutor.save
+
+    if @review.save && @tutor.save
       redirect_to @tutor
     else
       flash[:danger] = "Comment could not be added"

@@ -1,17 +1,20 @@
-<footer class="row footer">
-    <nav class="col-md-12 text-center text-uppercase">
-      <h4>Pages</h4>
-      <ul>
-        <li><%= link_to "About",   about_path %></li>
-        <li><%= link_to "Contact", contact_path %></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-    </nav>
-    <p class="col-lg-12 text-center">
-    <small>
-      Made with <span class="heart"></span> in dhaka by the Contut Team.
-    </small>
-  </p>
+<footer>
+    <div class="container">
+      <div class="row">  
+        <div class="col-md-4 center">
+          <span id="footer-logo">Contut<span>
+        </div>
+        
+        <div class="col-md-4 center">
+          <ul class="links">
+            <li><%= link_to "About",   about_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+          </ul>
+        </div>
+        
+        <div class="col-md-4 center" style="text-align: right;">
+          Made with <span class="heart"></span> in dhaka by the <strong>Contut Team.</strong>
+        </div>
+      </div>
+    </div>
 </footer>

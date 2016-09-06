@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  tutor_id: 1
-  subject_id: 1
-
-two:
-  tutor_id: 1
-  subject_id: 1

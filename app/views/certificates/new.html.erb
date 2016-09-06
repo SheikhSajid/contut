@@ -1,6 +1,9 @@
 
 <%= form_for @certificate, html: {class: "stickyfix page-header"} do |f| %>
-    <%= f.label(:photo) %>
-    <%= f.file_field :photo, class: "hidden" %>
+    <div class = "form-group">
+        <%= f.label(:photo) %>
+        <%= f.file_field :photo %>
+     </div>
+    
     <%= f.submit "Upload Certificate Photo", class: "btn btn-default" %>
 <% end %>

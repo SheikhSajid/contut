@@ -1,13 +1,22 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show]
-  # before_action :require_same_user, only: [:edit, :update, :destroy]
-  
+  # before_action :require_connection, only: [:show]
+
   def index
   end
 
   def show
     @reviews = @student.reviews.order(created_at: :desc)
+    @request_received = false
+    @request_accepted = false
+    
+    if tutor_signed_in?
+      @request_received = Request.pending? current_tutor.id, params[:id].to_i
+      @request_accepted = Accepted.already_accepted? current_tutor.id, params[:id].to_i
+    end
   end
+  
+
 
   # def new
   #   @student = Student.new
@@ -47,21 +56,17 @@ class StudentsController < ApplicationController
   # end
   
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    # def student_params
-    #   params.require(:student).permit(:first_name, :last_name, :email, :phone, :password,
-    #                                   :password_confirmation, :gender, :city, :area, :zip,
-    #                                   :full_address, :profile_picture)
-    # end
-    
     def set_student
       @student = Student.find(params[:id])
     end
     
-    # def require_same_user
-    #   if @student != current_user
-    #     flash[:danger] = "Unauthorized access"
+    # def require_connection
+    #   if !(student_signed_in? && current_student.id == params[:id])
+    #     flash[:notice] = "You can view student profiles only if you are connected to that student as a Tutor"
     #     redirect_to root_path
-    #   end
+    #   elsif !(tutor_signed_in? && (Request.pending?(current_tutor.id, params[:id]) || Accepted.already_accepted?(current_tutor.id, params[:id])))
+    #     flash[:notice] = "You can view student profiles only if you are connected to that student as a Tutor"
+    #     redirect_to root_path
+    #   end  
     # end
 end

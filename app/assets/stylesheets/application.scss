@@ -1,0 +1,311 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+ 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+ 
+ .bg-purple {
+   background-color: #191970;
+ }
+ 
+ .bg-blue {
+   background-color: #4876FF;
+ }
+  .bg-mustard {
+   background-color: #FFC125;
+ }
+ 
+ .bg-soft-red {
+   background-color: #DC3667;
+ }
+
+
+
+html, body {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4rem;
+}
+
+
+.stickyfix {
+  margin-top: 3rem;
+}
+
+#banner {
+  height: calc(100vh - 3rem);
+}
+
+#banner section {
+  height: 100%;
+}
+
+#banner-pic {
+  height: calc(100vh - 3rem);
+  background: url("tutor.jpg"), no-repeat;
+  background-position: 0 -280px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: baseline;
+  color: #FFF;
+  margin-top: -20px;
+}
+
+#banner-pic section {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#banner-pic .btn {
+  margin: 1rem;
+}
+
+.headline {
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin-top: 30vh;
+  font-weight: 700;
+}
+
+.page-header {
+  padding: 2rem 2rem 0.5rem 2rem;
+}
+
+
+.form-control {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+}
+
+.btn-ghost {
+  text-transform: uppercase;
+  color: #fff;
+  border: 2px solid #fff;
+  outline: none;
+  text-decoration: none;
+  background: transparent;
+  border-radius: 5px;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.btn-dark {
+  color: #191970;
+  border-color: #191970;
+}
+
+.card-link  {
+  text-decoration: none;
+  color: #333;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.card {
+    padding: 20px;
+    background: #FFF;
+    border-radius: 10px;
+    /*min-width: 50%;*/
+    border-bottom: 15px solid #3CA2E0;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  -webkit-box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 7px 7px 10px 0px rgba(0,0,0,0.5);
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.rate {
+  font-weight: 500;
+  font-size: 1.28rem;
+}
+
+
+.heart:before {
+  content: '\2665';
+  color: red;
+}
+
+/* Tutor Profile Page Styles */
+.profile-image {
+    width: 75%;
+    border: 5px solid white; 
+    outline: 1px solid #dbdee0;
+}
+
+ul.profile-details {
+    margin-top: 10px;
+    padding: 0 5px;
+    list-style: none;
+    color: #7c848d;
+}
+
+ul.profile-details li {
+    position: relative;
+    margin: 0 0 20px 0;
+    padding-left: 22px;
+}
+
+ul.profile-details li div {
+    color: #b2b8bd;
+}
+
+#profile h3 {
+    padding: 0 5px;
+}
+
+#profile h2 {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 300;
+}
+
+body {
+    background: #f2f2f2;
+    color: #34383c;
+    border: 0;
+    /*font-family: 'Lato',sans-serif;*/
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.tab-content {
+    background: white;
+    border: 1px solid #dbdee0;
+    border-top: 0;
+    padding: 10px;
+}
+
+/* navbar */
+#main_nav {
+  background-color: #3CA2E0;
+  border: none;
+}
+
+.navbar-brand {
+  color: #fff;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+  font-size: 1.5em;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #fff;
+    background-color: transparent;
+    border-radius: 0px;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav li a {
+    color: #fff;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav .dropdown li a {
+    color: #000;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav  .open  a, .navbar-default .navbar-nav  .open  a:hover, .navbar-default .navbar-nav .open  a:focus {
+    background-color: #0288d6;
+    color: #fff;
+}
+
+.target-audience .row {
+  padding: 100px 0 100px 0;
+}
+
+/* footer */
+footer .center {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 72px;
+}
+
+footer {
+  background-color: #fff;
+}
+
+#footer-logo {
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+  font-size: 1.5em;
+  color: #3ca2e0;
+}
+
+.target-audience img {
+  margin: 0 auto;
+  border: 7px solid #fff;
+  width: 75%;
+}
+
+footer ul li {
+  display: inline;
+  margin: 10px;
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .form-control {
+  background-color: #fff;
+}
+
+/* homepage (signed-in) */
+.signed_in .section {
+  min-height: 300px;
+  background-color: #fff;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.section h2 {
+  margin: 0 0 10px 20px;
+}
+
+.thumbnail {
+  border: 1px solid #3CA2E0;
+}
+
+.section .empty-msg {
+  color: #bababa;
+}
+
+.content {
+  min-height: 1008px;
+}
+
+
+.checkbox #tutor_remember_me {
+  margin-left: 0;
+}
+
+.login-form {
+  background-color: #fff;
+  padding-bottom: 30px;
+}

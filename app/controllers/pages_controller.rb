@@ -2,7 +2,15 @@ class PagesController < ApplicationController
   def home
     if admin_signed_in?
       redirect_to certificates_path
+    elsif student_signed_in?
+      @connected = current_student.accepted_tutors.first(4)
+      @pending = current_student.pending_requests.first(4)
+    elsif tutor_signed_in?
+      @connected = current_tutor.accepted_students.first(4)
+      @pending = current_tutor.student_requests.first(4)
     end
+    
+    @top_tutors = Tutor.order(avg: :desc).first(6)
   end
 
   def about

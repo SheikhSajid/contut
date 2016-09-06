@@ -1,93 +1,115 @@
 <% provide(:title, "Contut | The easiest way to find private tutors") %>
 
-<!--<div id="banner" class="carousel slide" data-ride="carousel">-->
-<!--  <ol class="carousel-indicators">-->
-<!--    <li data-target="#banner" data-slide-to="0" class="active"></li>-->
-<!--    <li data-target="#banner" data-slide-to="1"></li>-->
-<!--  </ol>-->
-<!--  <div class="carousel-inner" role="listbox">-->
-<!--    <div class="carousel-item active">-->
-<!--      <%= image_tag('student.jpg', alt: "Student") %>-->
-<!--      <div class="carousel-caption"-->
-<!--        <h1>Find a great tutor near you!</h1>-->
-<!--        <% if !tutor_signed_in? and !student_signed_in? %> -->
-<!--          <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-primary" %>-->
-<!--        <% end %>-->
-<!--    </div>-->
-<!--    <div class="carousel-item">-->
-<!--      <%= image_tag('tutor.jpg', alt: "Student") %>-->
-<!--      <div class="carousel-caption">-->
-<!--        <h1>Have a passion for teaching?</h1>-->
-<!--        <% if !tutor_signed_in? and !student_signed_in? %> -->
-<!--          <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary" %>-->
-<!--        <% end %>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <a class="left carousel-control" href="#banner" role="button" data-slide="prev">-->
-<!--    <span class="icon-prev" aria-hidden="true"></span>-->
-<!--    <span class="sr-only">Previous</span>-->
-<!--  </a>-->
-<!--  <a class="right carousel-control" href="#banner" role="button" data-slide="next">-->
-<!--    <span class="icon-next" aria-hidden="true"></span>-->
-<!--    <span class="sr-only">Next</span>-->
-<!--  </a>-->
-<!--</div>-->
-
-<div id="banner-pic" class = "row stickyfix">
-  <section>
-    <h1 class="headline col-md-8 col-md-offset-2">The new smarter & faster way to discover tutors</h1>
-    <p class="col-md-8 col-md-offset-2">
-      <% if !tutor_signed_in? and !student_signed_in? %> 
-          <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-ghost" %>
-          <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost" %>
-      <% end %>
-    </p>
-  </section>
+<!--This part is displayedwhen no user is signed in-->
+<% if !signed_in? %>
+  <div class="not-signed-in">
+  <!--<div id="banner" class="carousel slide" data-ride="carousel">-->
+  <!--  <ol class="carousel-indicators">-->
+  <!--    <li data-target="#banner" data-slide-to="0" class="active"></li>-->
+  <!--    <li data-target="#banner" data-slide-to="1"></li>-->
+  <!--  </ol>-->
+  <!--  <div class="carousel-inner" role="listbox">-->
+  <!--    <div class="carousel-item active">-->
+  <!--      <%= image_tag('student.jpg', alt: "Student") %>-->
+  <!--      <div class="carousel-caption"-->
+  <!--        <h1>Find a great tutor near you!</h1>-->
+  <!--        <% if !tutor_signed_in? and !student_signed_in? %> -->
+  <!--          <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-primary" %>-->
+  <!--        <% end %>-->
+  <!--    </div>-->
+  <!--    <div class="carousel-item">-->
+  <!--      <%= image_tag('tutor.jpg', alt: "Student") %>-->
+  <!--      <div class="carousel-caption">-->
+  <!--        <h1>Have a passion for teaching?</h1>-->
+  <!--        <% if !tutor_signed_in? and !student_signed_in? %> -->
+  <!--          <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary" %>-->
+  <!--        <% end %>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <a class="left carousel-control" href="#banner" role="button" data-slide="prev">-->
+  <!--    <span class="icon-prev" aria-hidden="true"></span>-->
+  <!--    <span class="sr-only">Previous</span>-->
+  <!--  </a>-->
+  <!--  <a class="right carousel-control" href="#banner" role="button" data-slide="next">-->
+  <!--    <span class="icon-next" aria-hidden="true"></span>-->
+  <!--    <span class="sr-only">Next</span>-->
+  <!--  </a>-->
+  <!--</div>-->
+  
+  <div id="banner-pic" class = "row">
+    <section>
+      <h1 class="headline col-md-8 col-md-offset-2">The new smarter & faster way to discover tutors</h1>
+      <p class="col-md-8 col-md-offset-2">
+        <% if !tutor_signed_in? and !student_signed_in? %> 
+            <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-primary btn-lg" %>
+            <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-primary btn-lg" %>
+        <% end %>
+      </p>
+    </section>
+  </div>
+  
+  
+  
+  <!--<div id="banner" class = "row stickyfix">-->
+  <!--  <section class = "col-md-7 bg-yellow">-->
+  <!--    <h1>Find a great tutor near you!</h1>-->
+  <!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
+  <!--      <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-ghost" %>-->
+  <!--    <% end %>-->
+  <!--  </section>-->
+  <!--  <section class = "col-md-5 bg-soft-red">-->
+  <!--    <h1>Have a passion for teaching?</h1>-->
+  <!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
+  <!--      <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost" %>-->
+  <!--    <% end %>-->
+  <!--  </section>-->
+  <!--</div>-->
+  
+  
+     <!---------------- Sections -------------------->
+  <article class="container target-audience">
+    <div class="row">
+      <section class="col-md-4">
+        <%= image_tag "student_cropped.jpg", class: "img-responsive img-circle" %>
+        <h3 class="text-center text-uppercase">For Students</h3>
+        <p>Finding a private tutor has always proved to be a challenging affair. But not anymore, thanks to Contut. All you have to do to a find the perfect tutor is to sign up with us and then choose from our wide database of private tutors. Find the perfect tutor based on location, subjects taugt, grades taught, ratings and price. Then all you have to do is send him/her a message from our platform and the two of you jointly come to an agreement. It's as easy as that.</p>
+      </section>
+      <section class="col-md-4">
+        <%= image_tag "parenting-main.jpg", class: "img-responsive img-circle" %>
+        <h3 class="text-center text-uppercase">For Parents</h3>
+        <p>Finding a private tutor for your children have always been a challenging affair but it won't be anymore thanks to Contut. We make it really easy to find the best tutor out there. Create a profile for yourself or your child and using that, discover tutors in our expansive database. Select the tutor you like after checking out their profile and other students' reviews of the tutor and then contact them through our system. It's as easy as that.</p>
+      </section>
+      <section class="col-md-4">
+        <%= image_tag "tutor-section.jpg", class: "img-responsive img-circle" %>
+        <h3 class="text-center text-uppercase">For Tutors</h3>
+        <p>Teaching is a noble profession and of the most popular ones amongst young adults and university students. However finding students have always been a challenge and it has caused harm to both the students and the prospective tutors. With Contut, it's easier than ever before to become a tutor and acquire new students. All one has to do is to sign up with us and make a killer profile.</p>
+      </section>
+    </div>
+  </article>
 </div>
-
-
-
-<!--<div id="banner" class = "row stickyfix">-->
-<!--  <section class = "col-md-7 bg-yellow">-->
-<!--    <h1>Find a great tutor near you!</h1>-->
-<!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
-<!--      <%= link_to "Signup as a student", new_student_registration_path, class: "btn btn-ghost" %>-->
-<!--    <% end %>-->
-<!--  </section>-->
-<!--  <section class = "col-md-5 bg-soft-red">-->
-<!--    <h1>Have a passion for teaching?</h1>-->
-<!--    <% if !tutor_signed_in? and !student_signed_in? %> -->
-<!--      <%= link_to "Become a tutor", new_tutor_registration_path, class: "btn btn-ghost" %>-->
-<!--    <% end %>-->
-<!--  </section>-->
-<!--</div>-->
-
-
-
-<article class = "container">
-  <div class="row text-center">
-    <h2 class="text-uppercase">How it works</h2>
-    <p>Contut is a faster, smarter way to find a teacher.</p>
+<% else %>
+<!------------- Rendered when user is signed in ------------->
+  <div class="signed_in container">
+    
+    <%= render partial: "shared/requests", locals: {connected: @connected, pending: @pending} %>
+    
+    <!-----Top 5 tutors--------->
+    <div class="row section">
+      <div class="row"><h2>Top Rated Tutors</h2></div>
+      
+      <div class="row">
+        <% @top_tutors.each do |user| %>
+          <% type="tutor_list" %>
+          <div class="col-md-3 col-sm-4">
+            <%= render partial: "shared/card", locals: {user: user, type: type} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  
   </div>
-  <div class="row">
-    <section class="col-md-4">
-      <h3 class="text-center text-uppercase">For Students</h3>
-      <p>Finding a private tutor has always proved to be a challenging affair. But not anymore, thanks to Contut. All you have to do to a find the perfect tutor is to sign up with us and then choose from our wide database of private tutors. Find the perfect tutor based on location, subjects taugt, grades taught, ratings and price. Then all you have to do is send him/her a message from our platform and the two of you jointly come to an agreement. It's as easy as that.</p>
-    </section>
-    <section class="col-md-4">
-      <h3 class="text-center text-uppercase">For Parents</h3>
-      <p>Finding a private tutor for your cchildrren have always been a challenging affair but it won't be anymore thanks to Contut. We make it really easy to find the best tutotr out there. Create a profile ffor and your child and using that, discover tutors in our expansive database. Select the tutor you like after checking out their profile and other students' reviews of the tutor and then contact them through our system. It's as easy as that.</p>
-    </section>
-    <section class="col-md-4">
-      <h3 class="text-center text-uppercase">For Tutors</h3>
-      <p>Teaching is a noble profession and of the most popular ones amongst young adults and university students. Howver finding students have always been a challenge and it has caused harm to both the students and the prospective tutors. With Contut, it's easier than ever before to become a tutor and acquire new students. All one has to do is to sign up with us and make a killer profile.</p>
-    </section>
-  </div>
-</article>
-
-
-
+<% end %>
 
 
 

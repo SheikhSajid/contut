@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # Requests
   post    'request'   => 'requests#create_request'
   get     'accept'    => 'requests#accept_request'
-  get     'request'   => 'requests#my_students'
+  get     'request'   => 'requests#my_requests'
   delete  'request'   => 'requests#destroy'
 
   # Admin Authentication

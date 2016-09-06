@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727164627) do
+ActiveRecord::Schema.define(version: 20160816041637) do
 
   create_table "accepteds", force: :cascade do |t|
     t.integer  "tutor_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20160727164627) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "email",                        default: "", null: false
+    t.string   "institution"
   end
 
   add_index "students", ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
@@ -162,6 +163,8 @@ ActiveRecord::Schema.define(version: 20160727164627) do
     t.string   "name",                                         null: false
     t.boolean  "approved",                     default: false
     t.boolean  "pending_approval",             default: false
+    t.float    "avg",                          default: 0.0
+    t.integer  "no_of_reviews",                default: 0
   end
 
   add_index "tutors", ["confirmation_token"], name: "index_tutors_on_confirmation_token", unique: true

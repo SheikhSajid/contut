@@ -1,29 +1,6 @@
 <% provide(:title, "#{@student.first_name} #{@student.last_name}") %>
 
-<div class="row">
-
-<!------------Profile photo and info-------------->
-<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-  <%= image_tag @student.profile_picture.url(:thumb) %>
-  
-  <h2><%= "#{@student.first_name} #{@student.last_name}" %></h2>
-  <p>email: <%= @student.email %></p>
-</div>  
-
-
-<!--------ratings from the students-------------->
-<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 reviews">
-  <p>Tutors Reviewed: <%= reviews_written %></p></br>
-  <% @reviews.each do |review| %>
-    <p><% tutor = Tutor.find(review.tutor_id) %>
-    <%= link_to tutor.fname + " " + tutor.lname, tutor_path(tutor) %>
-    <%=  time_ago_in_words(review.created_at) %> ago
-    <div class="star-rating" data-score=<%= review.rating %>></div>
-    <%= review.comment %>
-  <% end %></p>
-</div>
-
-</div>
+<%= render partial: "shared/profile", locals: { user: @student, id: params[:id], reviews: @reviews, request_received: @request_received, request_accepted: @request_accepted, type: "student" } %>
 
 <script>
   $(".star-rating").raty({

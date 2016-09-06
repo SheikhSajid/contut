@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
   #   end
   # end
   
+  def signed_in?
+    tutor_signed_in? || student_signed_in? || admin_signed_in?
+  end
+  
   def require_tutor
     if !tutor_signed_in?
       flash[:danger] = "You must be logged as a tutor perform that action"
