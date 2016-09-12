@@ -31,6 +31,13 @@ class ApplicationController < ActionController::Base
     tutor_signed_in? || student_signed_in? || admin_signed_in?
   end
   
+  def require_signed_in_user
+    if !(tutor_signed_in? || student_signed_in? || admin_signed_in?)
+      flash[:danger] = "Unauthorized"
+      redirect_to root_path
+    end
+  end
+  
   def require_tutor
     if !tutor_signed_in?
       flash[:danger] = "You must be logged as a tutor perform that action"
@@ -41,6 +48,20 @@ class ApplicationController < ActionController::Base
   def require_student
     if !student_signed_in?
       flash[:danger] = "You must be logged as a student perform that action"
+      redirect_to root_path
+    end
+  end
+  
+  def verify_student
+    if !student_signed_in? || params[:student_id].to_i != current_student.id
+      flash[:danger] = "Unauthorized"
+      redirect_to root_path
+    end
+  end
+  
+  def verify_tutor
+    if !tutor_signed_in? || params[:tutor_id].to_i != current_tutor.id
+      flash[:danger] = "Unauthorized"
       redirect_to root_path
     end
   end

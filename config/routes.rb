@@ -12,10 +12,8 @@ Rails.application.routes.draw do
   get     'feed'      => 'messages#feed'
   
   # Requests
-  post    'request'   => 'requests#create_request'
-  get     'accept'    => 'requests#accept_request'
-  get     'request'   => 'requests#my_requests'
-  delete  'request'   => 'requests#destroy'
+  resources :requests, only: [:create, :index, :destroy]
+  post     'accept_request'    => 'requests#accept'
 
   # Admin Authentication
   get     'admin_login'     => 'sessions#new'

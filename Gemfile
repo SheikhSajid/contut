@@ -34,17 +34,20 @@ gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :test do
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails', :require => false
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  
   # Use RSpec for unit and functional testing
   gem 'rspec-rails', '~> 3.5'
-  
-  gem "factory_girl_rails"
+  gem 'factory_girl_rails'
+  gem 'capybara'
 end
 
 group :development do

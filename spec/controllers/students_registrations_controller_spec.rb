@@ -11,9 +11,9 @@ end
 
 RSpec.describe Students::RegistrationsController do
   context "Student logged in" do
+    login_student
+    
     describe "edit profile request" do
-      login_student
-      
       it "renders edit.html.erb" do
         get :edit, id: @student.id
         expect(response).to render_template("students/registrations/edit")
@@ -22,7 +22,6 @@ RSpec.describe Students::RegistrationsController do
     
     describe "form submission" do
       before(:each) do
-        login_student
         @updated_attributes = FactoryGirl.attributes_for(:student, :first_name => "New", :last_name => "Name", :current_password => "password" )
         put :update, { :id => @student.id, :student => @updated_attributes }
         @student.reload

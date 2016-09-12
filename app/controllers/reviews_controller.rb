@@ -1,16 +1,16 @@
 class ReviewsController < ApplicationController
-  before_action :require_same_student, only: [:edit, :update, :destroy]
-  before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_tutor
   before_action :require_student, only: [:new, :create]
- 
+  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :require_same_student, only: [:edit, :update, :destroy]
+  before_action :set_tutor
+  
   def new
     @review = Review.new
   end
 
   def create
     @review = Review.new(review_params)
-    @review.student_id = current_user.id
+    @review.student_id = current_student.id
     @review.tutor_id = @tutor.id
     
     @tutor.no_of_reviews += 1
@@ -53,7 +53,7 @@ class ReviewsController < ApplicationController
     end
     
     def require_same_student
-      if @review.student_id != current_student.id
+      if !student_signed_in? || @review.student_id != current_student.id
         flash[:danger] = "Oops! You are not allowed to do that."
         redirect_to root_path
       end

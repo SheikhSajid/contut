@@ -27,8 +27,8 @@
     
     <% if tutor_signed_in? && type == "pending" %>
       <p>
-        <%= link_to "Accept", accept_path({student_id: user.id}), class: "btn btn-primary" %>
-        <%= link_to "Decline", request_path({student_id: user.id}), :method => :delete, class: "btn btn-danger" %>
+        <%= link_to "Accept", accept_request_path({student_id: user.id}), class: "btn btn-primary", method: :post %>
+        <%= link_to "Decline", request_path({student_id: user.id, id: -1}), :method => :delete, class: "btn btn-danger" %>
       </p>
     <% elsif student_signed_in? && type == "pending" %>
       <p><%= link_to "Delete Request", request_path({tutor_id: user.id}), :method => :delete, class: "btn btn-danger" %><br />

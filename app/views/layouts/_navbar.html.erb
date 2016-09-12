@@ -45,7 +45,7 @@
           <!--Show requests icon only if tutor logged in-->
           <% if tutor_signed_in? %>
             <li>
-              <%= link_to request_path, title: 'Connections', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
+              <%= link_to requests_path, title: 'Connections', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               <% end %>
             </li>

@@ -27,7 +27,7 @@
         <% if student_signed_in? && type == "tutor" %>
           <%= link_to "Message", new_message_path({tutor_id: id}), class: "btn btn-primary" %>
           <% if !request_sent && request_accepted.empty? %>
-            <%= link_to "Send Request", request_path({tutor_id: id}), class: "btn btn-primary", method: :post %>
+            <%= link_to "Send Request", requests_path({tutor_id: id}), class: "btn btn-primary", method: :post %>
           <% elsif request_sent %>
             <br /><br /><p><em>Request pending.</em></p>
           <% end %>
@@ -36,7 +36,7 @@
             <%= link_to "Message", new_message_path({student_id: id}), class: "btn btn-primary" %>
             
             <% if request_received %>
-              <%= link_to "Accept Request", accept_path({student_id: id}), class: "btn btn-primary" %>
+              <%= link_to "Accept Request", accept_request_path({student_id: id}), class: "btn btn-primary", method: :post %>
             <% end %>
           <% end %>
         <% end %>

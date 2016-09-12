@@ -26,16 +26,18 @@ FactoryGirl.define do
     institution "BRAC University"
     year "2017"
     confirmed_at Date.today
+    no_of_reviews 0
+    avg 0.0
   end
   
   factory :request do
-    tutor_id 0
-    student_id 0
+    tutor_id 100
+    student_id 100
   end
   
   factory :accepted do
-    tutor_id 0
-    student_id 0
+    tutor_id 100
+    student_id 100
   end
   
   factory :review do
