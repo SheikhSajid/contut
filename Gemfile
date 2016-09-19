@@ -37,6 +37,7 @@ gem 'devise'
 group :test do
   gem 'simplecov', :require => false
   gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :development, :test do

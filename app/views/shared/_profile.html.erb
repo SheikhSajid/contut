@@ -159,7 +159,8 @@
                 
                 
                   <% already_reviewed = true if (student_signed_in? && review.student_id == current_student.id) %>
-                  <% if student_signed_in? and already_reviewed %>
+                  
+                  <% if student_signed_in? and review.student_id == current_student.id %>
                     <div class="edit-delete-review">
                       <small><%= link_to "Edit", edit_tutor_review_path(user, review) %></small>
                       <small><%= link_to "Delete", tutor_review_path(user, review), :method => :delete %> </small>
@@ -172,14 +173,14 @@
               </br></br>
               
               <!------------Add review button------------>
-              <% if !(already_reviewed) && student_signed_in?%>
+              <% if !(already_reviewed) && student_signed_in? && Accepted.already_accepted?(id, current_student.id) %>
                 <p><%= link_to "Write a review", new_tutor_review_path(user), class: "btn btn-primary" %></p>
               <% end %>
             </div>
           <% else %>
             <div class="col-md-6 col-xs-12" id ="reviews">
                
-                <% @reviews.each do |review| %>
+                <% reviews.each do |review| %>
                   <p><% tutor = Tutor.find(review.tutor_id) %>
                   <%= link_to tutor.name, tutor_path(tutor) %>
                   <%=  time_ago_in_words(review.created_at) %> ago

@@ -15,7 +15,6 @@ class ReviewsController < ApplicationController
     
     @tutor.no_of_reviews += 1
     @tutor.avg = (@tutor.avg + @review.rating) / @tutor.no_of_reviews
-    @tutor.save
 
     if @review.save && @tutor.save
       redirect_to @tutor
