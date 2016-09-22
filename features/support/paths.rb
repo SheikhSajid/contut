@@ -15,6 +15,8 @@ module NavigationHelpers
 
     when /^the Tutor login page$/ then '/tutors/sign_in'
     when /^the Student login page$/ then '/students/sign_in'
+    when /^student (.*)'s profile$/i
+      student_path(Student.find_by_first_name($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

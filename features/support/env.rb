@@ -49,6 +49,31 @@ After do |scenario|
   DatabaseCleaner.clean
 end
 
+# OmniAuth
+Before('@omniauth_test') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.add_mock(:facebook, {
+    uid: '12345',
+    info: {
+      email: 'testmail@mail.com',
+    },
+    extra: {
+      raw_info: {
+        first_name: 'Facebookuser',
+        last_name: 'Doe',
+        location: { id: '12345', name: 'Palo Alto, California' },
+        gender: 'male'
+      }
+    }
+  })
+end
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end
+
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:

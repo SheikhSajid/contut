@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'admins/new'
 
-  devise_for :students, controllers: { registrations: 'students/registrations' }
+  devise_for :students, controllers: { registrations: 'students/registrations', omniauth_callbacks: 'students/omniauth_callbacks' }
   devise_for :tutors, controllers: { registrations: 'tutors/registrations' }
   
   root    'pages#home'

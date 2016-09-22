@@ -32,4 +32,4 @@ class Tutor < ActiveRecord::Base
   has_attached_file :profile_picture, styles: { large: "900x900>", thumb: "300x300>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   
-end
+ end

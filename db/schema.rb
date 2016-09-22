@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816041637) do
+ActiveRecord::Schema.define(version: 20160920050517) do
 
   create_table "accepteds", force: :cascade do |t|
     t.integer  "tutor_id"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 20160816041637) do
     t.datetime "locked_at"
     t.string   "email",                        default: "", null: false
     t.string   "institution"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "students", ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
