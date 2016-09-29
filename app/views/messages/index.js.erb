@@ -1,0 +1,4 @@
+console.log("get request received.");
+$('#message-list').append('<%= j render @messages %>');
+Poller.poll(5000);
+console.log("ajax request complete.");

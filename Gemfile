@@ -7,12 +7,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip', '~> 4.2.0'
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'will_paginate', '~> 3.1.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

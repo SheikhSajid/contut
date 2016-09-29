@@ -4,7 +4,7 @@ class TutorsController < ApplicationController
   # before_action :authenticate_tutor!, only: [:edit, :update, :destroy]
   
   def index
-    @tutors = Tutor.all
+    @tutors = Tutor.paginate(:page => params[:page])
   end
 
   def show

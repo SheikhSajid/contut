@@ -52,4 +52,7 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def confirmed_at
+    Time.now
+  end
 end

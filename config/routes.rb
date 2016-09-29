@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get     'about'     => 'pages#about'
   get     'contact'   => 'pages#contact'
   get     'search'    => 'pages#search'
-  get     'messages'  => 'messages#mymessages'
-  get     'feed'      => 'messages#feed'
+  get     'message_list'  => 'messages#mymessages'
+  # get     'feed'      => 'messages#feed'
   
   # Requests
   resources :requests, only: [:create, :index, :destroy]
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
   resources :students, only: [:show]
   resources :subjects
-  resources :messages, except: [:show, :index]
+  resources :messages, except: [:show]
   
   resources :articles
   

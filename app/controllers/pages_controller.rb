@@ -20,16 +20,11 @@ class PagesController < ApplicationController
   end
   
   def search
-    @tutors_found = Tutor.where("name LIKE ? OR email LIKE ? OR full_address LIKE ? OR city LIKE ? OR area LIKE ?", 
-                                "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-    @subject_tutors_found = []
+    tutors_found = Tutor.search(params[:search])
+    subject_tutors = Subject.tutors_who_teach_this_subject(params[:search])
     # @subjects_found = Subject.joins(:tutor).where("subjects.name LIKE ?", "%#{params[:search]}%")
-    @subjects_found = Subject.where("subjects.name LIKE ?", "%#{params[:search]}%").includes(:tutor)
-    @subjects_found.each do |s|
-      @subject_tutors_found << s.tutor
-    end
-    
-    @tutors_found = @tutors_found.to_a + @subject_tutors_found
+
+    @tutors_found = tutors_found.to_a + subject_tutors
 
     respond_to do |format|
       format.html

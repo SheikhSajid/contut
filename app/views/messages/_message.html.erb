@@ -1,0 +1,21 @@
+
+<% if (tutor_signed_in? && message.sender_tutor) || (student_signed_in? && message.sender_student) %>
+  <div class="row">
+    <div class="col-sm-6 message message-sent" data-id="<%= message.id %>">
+      You: <%= message.message %>
+    </div>
+  </div>
+<% elsif tutor_signed_in? %>
+  <div class="row">
+    <div class="col-sm-6 message message-received" data-id="<%= message.id %>">  
+      <%= "#{message.student.first_name}:  #{message.message}" %>
+    </div>
+  </div>
+<% elsif student_signed_in? %>
+  <div class="row">
+    <div class="col-sm-6 message message-received" data-id="<%= message.id %>">
+      <%= "#{message.tutor.fname}:  #{message.message}" %>
+    </div>
+  </div>
+<% end %>
+

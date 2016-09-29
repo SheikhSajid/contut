@@ -32,4 +32,12 @@ class Tutor < ActiveRecord::Base
   has_attached_file :profile_picture, styles: { large: "900x900>", thumb: "300x300>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   
+  def self.search(search_term)
+    where("name LIKE ? OR email LIKE ? OR full_address LIKE ? OR city LIKE ? OR area LIKE ?", 
+                                search_term, search_term, search_term, search_term, search_term)
+  end
+  
+  def confirmed_at
+    Time.now
+  end
  end

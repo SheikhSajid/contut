@@ -1,0 +1,27 @@
+ 
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 col-sm-12" id="message-list">
+    <%= render @messages %>
+  </div>
+</div>
+
+<div align='center' id="send">
+  <%= form_for(@message, remote: true) do |f| %>
+    <%= f.text_area :message, :placeholder => "Type Your Message" %>
+    
+    <% if tutor_signed_in? %>
+      <%= f.hidden_field :sender_tutor, :value => true %>
+      <%= f.hidden_field :tutor_id, :value => current_tutor.id %>
+      <%= f.hidden_field :student_id, :value => params[:student_id] %>
+    <% elsif student_signed_in? %>
+      <%= f.hidden_field :sender_student, :value => true %>
+      <%= f.hidden_field :tutor_id, :value => params[:tutor_id] %>
+      <%= f.hidden_field :student_id, :value => current_student.id %>
+    <% end %>
+    
+    <%= f.submit "Send", class: 'btn btn-primary btn-lg' %>
+  <% end %>
+</div>
+  

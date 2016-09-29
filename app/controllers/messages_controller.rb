@@ -8,37 +8,38 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     
-    if @message.save
-      if student_signed_in?
-        redirect_to feed_path({tutor_id: @message.tutor_id})
-      elsif tutor_signed_in?
-        redirect_to feed_path({student_id: @message.student_id})
+    respond_to do |format|
+      if @message.save
+        format.js
+      else
+        flash[:danger] = "Message not sent.Oops!"
+        redirect_to root_path
       end
-    else
-      flash[:danger] = "Message not sent.Oops!"
-      redirect_to root_path
     end
   end
   
   def mymessages
     if tutor_signed_in?
-      @senders = Message.where(tutor_id: current_tutor.id)
-      @senders = @senders.select("DISTINCT student_id")
+      @messages = Message.includes(:student).where(tutor_id: current_tutor.id).select("DISTINCT student_id")
     elsif student_signed_in?
-      @senders = Message.where(student_id: current_student.id)
-      @senders = @senders.select("DISTINCT tutor_id")
+      @messages = Message.includes(:tutor).where(student_id: current_student.id).select("DISTINCT tutor_id")
     end
   end
   
-  def feed
+  def index
     if tutor_signed_in?
-      @messages = Message.where("student_id = ? AND tutor_id = ?", params[:student_id],
-                                                                   current_tutor.id)
-      @sender = Student.find(params[:student_id])
+      @messages = Message.includes(:student).where("student_id = ? AND tutor_id = ? AND id > ?", params[:student_id],
+                                                                   current_tutor.id, params[:after_id])
     elsif student_signed_in?
-      @messages = Message.where("student_id = ? AND tutor_id = ?", current_student.id,
-                                                                   params[:tutor_id])
-      @sender = Tutor.find(params[:tutor_id])
+      @messages = Message.includes(:tutor).where("student_id = ? AND tutor_id = ? AND id > ?", current_student.id,
+                                                                   params[:tutor_id], params[:after_id])
+    end
+    
+    @message = Message.new
+    
+    respond_to do |format|
+      format.html
+      format.js {render :layout => false }
     end
   end
   
@@ -47,9 +48,5 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:message, :sender_tutor, :sender_student,
                                                 :tutor_id, :student_id)
-    end
-    
-    def signed_in?
-      tutor_signed_in? or student_signed_in?
     end
 end
