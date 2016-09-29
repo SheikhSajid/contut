@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   resources :subjects
   resources :messages, except: [:show]
   
-  resources :articles
   
   resources :certificates, except: [:destroy]
   get 'approve_certificate' => 'certificates#approve'
