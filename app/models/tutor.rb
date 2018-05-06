@@ -33,8 +33,8 @@ class Tutor < ActiveRecord::Base
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   
   def self.search(search_term)
-    where("name LIKE ? OR email LIKE ? OR full_address LIKE ? OR city LIKE ? OR area LIKE ?", 
-                                search_term, search_term, search_term, search_term, search_term)
+    where("name LIKE :search OR email LIKE :search OR full_address LIKE :search OR city LIKE :search OR area LIKE :search", 
+                                search: "%#{search_term}%")
   end
   
   def confirmed_at

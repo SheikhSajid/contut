@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
     end
   end
   
-  def mymessages
+  def inbox
     if tutor_signed_in?
       @messages = Message.includes(:student).where(tutor_id: current_tutor.id).select("DISTINCT student_id")
     elsif student_signed_in?
